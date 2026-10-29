@@ -29,3 +29,8 @@ if(f)f.addEventListener('submit',async ev=>{ev.preventDefault();const m=f.queryS
   for(;;){await wait(1800);const x=W[k];for(let i=x.length;i>=0;i--){set(PRE,x.slice(0,i),POST);await wait(35)}
    k=(k+1)%W.length;const n=W[k];await wait(200);for(let i=1;i<=n.length;i++){set(PRE,n.slice(0,i),POST);await wait(55)}}})();})();
 document.querySelectorAll('.themetog').forEach(function(b){b.addEventListener('click',function(){var r=document.documentElement,n=r.getAttribute('data-theme')==='light'?'dark':'light';r.setAttribute('data-theme',n);try{localStorage.setItem('pb-theme',n)}catch(e){}})});
+(function(){var m=document.getElementById('orbmodal');if(!m)return;var f=m.querySelector('.orbframe'),last;
+function open(e){last=e&&e.currentTarget;if(!f.firstChild){var i=document.createElement('iframe');i.src=window.PB_ORB;i.title='PaulBots AI voice demo';i.setAttribute('allow','microphone; autoplay');f.appendChild(i)}m.hidden=false;document.body.style.overflow='hidden';m.querySelector('.orbclose').focus()}
+function close(){m.hidden=true;document.body.style.overflow='';f.innerHTML='';if(last)last.focus()}
+document.querySelectorAll('.orbopen').forEach(function(b){b.addEventListener('click',open)});
+m.querySelector('.orbclose').addEventListener('click',close);m.addEventListener('click',function(e){if(e.target===m)close()});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!m.hidden)close()})})();
