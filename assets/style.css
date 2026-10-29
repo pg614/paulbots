@@ -84,3 +84,6 @@ html:not(.js) .typer .typed{display:none}
 .hw{display:inline-block;padding:0 .18em;border-radius:.18em;background:linear-gradient(120deg,rgba(37,99,235,.55),rgba(14,165,233,.45));box-shadow:inset 0 0 0 1px rgba(125,211,252,.35);color:#e0f7ff;min-width:.3em}
 .caret{display:inline-block;width:.07em;height:.85em;margin-left:.04em;margin-right:-.11em;vertical-align:-.06em;background:#7dd3fc;animation:caret 1s steps(1) infinite}
 .hw .caret{background:#fff}
+/* WebKit-safe solid highlight (no background-clip:text) */
+.hw{display:inline-block;padding:0 .2em;border-radius:.2em;background-color:#2563eb;background-image:linear-gradient(120deg,#2563eb,#0ea5e9);color:#fff;-webkit-text-fill-color:#fff;box-shadow:none;-webkit-box-decoration-break:clone;box-decoration-break:clone;min-width:.4em;line-height:1.1}
+.typer .typed .caret{display:inline-block}
