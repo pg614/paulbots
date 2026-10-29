@@ -191,3 +191,4 @@ html[data-theme=light] .eyebrow.light{color:#1d4ed8}
 html[data-theme=light] footer{background:#f8fafc;color:#475569;border-top:1px solid #e2e8f0}
 html[data-theme=light] .foot b{color:#0f172a}html[data-theme=light] .foot a{color:#475569}html[data-theme=light] .foot a:hover{color:#2563eb}
 html[data-theme=light] .float{background:#fff;color:#0b1630;box-shadow:0 8px 24px rgba(15,23,42,.15);border:1px solid #e2e8f0}
+@media (max-width:768px){.herotext h1.typer{min-height:2.85em}}
