@@ -12,15 +12,18 @@ if(f)f.addEventListener('submit',async ev=>{ev.preventDefault();const m=f.queryS
  if(!ep||ep.startsWith('PLACEHOLDER')){console.warn('Form endpoint not connected yet',data);m.textContent='Thanks! Our online form is being connected. For the fastest reply, please call 888-772-2820.';return}
  try{const r=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)});
   if(!r.ok)throw 0;f.reset();m.textContent="Thanks! We got your request and will be in touch soon."}catch{m.textContent='Sorry, something went wrong. Please call 888-772-2820.'}});
-// Hero typewriter: line 1, then line 2 cycles its middle word(s). Full text lives in the h1 aria-label.
+// Hero typewriter: line 1, then line 2 cycles its highlighted middle word. Full text lives in the h1 aria-label.
 (()=>{const h=document.querySelector('.typer');if(!h)return;const L=[...h.querySelectorAll('.tl')].map(l=>[l.querySelector('.ghost'),l.querySelector('.typed')]);
  const W=['Everything','Sales','Service','Follow-Up','Check-Ins','Prospecting'],pre='Stop Doing ',post=' Yourself.';
- const longest=W.reduce((a,b)=>b.length>a.length?b:a);L[1][0].textContent=pre+longest+post; // reserve space for widest variant
+ const C='<span class="caret"></span>',hw=(w,c)=>`<span class="hw">${w}${c?C:''}</span>`;
+ const longest=W.reduce((a,b)=>b.length>a.length?b:a);L[1][0].innerHTML=pre+hw(longest)+post; // reserve space incl. highlight padding
  const[l1,e1]=[L[0][0].textContent,L[0][1]],e2=L[1][1];
- if(matchMedia('(prefers-reduced-motion: reduce)').matches){e1.textContent=l1;e2.textContent=pre+W[0]+post;h.dataset.done='1';return}
- const wait=ms=>new Promise(r=>setTimeout(r,ms)),cur=e=>{[e1,e2].forEach(x=>x.classList.toggle('cur',x===e))};
- (async()=>{await wait(300);cur(e1);for(let i=1;i<=l1.length;i++){e1.textContent=l1.slice(0,i);await wait(52)}
-  await wait(260);cur(e2);let t=pre+W[0]+post;for(let i=1;i<=t.length;i++){e2.textContent=t.slice(0,i);await wait(52)}
-  h.dataset.done='1';let k=0;
-  for(;;){await wait(1800);const w=W[k];for(let i=w.length;i>=0;i--){e2.textContent=pre+w.slice(0,i)+post;await wait(35)}
-   k=(k+1)%W.length;const n=W[k];await wait(200);for(let i=1;i<=n.length;i++){e2.textContent=pre+n.slice(0,i)+post;await wait(55)}}})();})();
+ // n = chars typed of the full line; caret placed at the typing point
+ const line2=(w,n)=>{const a=pre.length,b=a+w.length;if(n<=a)return pre.slice(0,n)+C;if(n<=b)return pre+hw(w.slice(0,n-a),1);return pre+hw(w)+post.slice(0,n-b)+C};
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){e1.textContent=l1;e2.innerHTML=pre+hw(W[0])+post;h.dataset.done='1';return}
+ const wait=ms=>new Promise(r=>setTimeout(r,ms));
+ (async()=>{await wait(300);for(let i=1;i<=l1.length;i++){e1.innerHTML=l1.slice(0,i)+C;await wait(52)}e1.textContent=l1;
+  await wait(260);const t=pre+W[0]+post;for(let i=1;i<=t.length;i++){e2.innerHTML=line2(W[0],i);await wait(52)}
+  e2.innerHTML=pre+hw(W[0],1)+post;h.dataset.done='1';let k=0;
+  for(;;){await wait(1800);const w=W[k];for(let i=w.length;i>=0;i--){e2.innerHTML=pre+hw(w.slice(0,i),1)+post;await wait(35)}
+   k=(k+1)%W.length;const n=W[k];await wait(200);for(let i=1;i<=n.length;i++){e2.innerHTML=pre+hw(n.slice(0,i),1)+post;await wait(55)}}})();})();
