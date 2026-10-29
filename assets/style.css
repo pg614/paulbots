@@ -192,3 +192,28 @@ html[data-theme=light] footer{background:#f8fafc;color:#475569;border-top:1px so
 html[data-theme=light] .foot b{color:#0f172a}html[data-theme=light] .foot a{color:#475569}html[data-theme=light] .foot a:hover{color:#2563eb}
 html[data-theme=light] .float{background:#fff;color:#0b1630;box-shadow:0 8px 24px rgba(15,23,42,.15);border:1px solid #e2e8f0}
 @media (max-width:768px){.herotext h1.typer{min-height:2.85em}}
+/* calm hero v4 */
+.topbar,.mcall,.float,.mini{display:none!important}
+body{padding-bottom:0!important}
+.hw,html[data-theme=light] .hw{display:inline!important;padding:0!important;background:none!important;background-image:none!important;box-shadow:none!important;border-radius:0!important;color:#22d3ee!important;-webkit-text-fill-color:#22d3ee!important}
+html[data-theme=light] .hw{color:#2563eb!important;-webkit-text-fill-color:#2563eb!important}
+.typer .caret{width:2px!important;margin-left:2px!important;background:currentColor!important;opacity:.7}
+.hsub{color:#94a3b8!important;font-size:1.1rem!important;line-height:1.65!important;max-width:34em;margin:22px 0 0!important}
+html[data-theme=light] .hsub{color:#475569!important}
+.hcta{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:32px}
+.hbtn{height:52px;padding:0 26px;font-size:1rem;font-weight:600;letter-spacing:0;text-transform:none;border-radius:12px}
+.hlink{color:#93c5fd;font-weight:500;font-size:.95rem;text-decoration:none}.hlink:hover{text-decoration:underline}
+html[data-theme=light] .hlink{color:#2563eb}
+.intro{text-align:center;max-width:40em;margin:0 auto 56px}.intro .lead{color:#475569}.intro .strong{color:#0f172a}
+@media (max-width:768px){
+.hero{padding:64px 0 72px!important}
+.herotext{text-align:center;align-items:center}
+.herotext .badge{margin-bottom:0!important}
+.herotext h1{margin:28px 0 0!important;font-size:2.5rem!important;line-height:1.12!important;min-height:0!important}
+.herotext h1.typer{min-height:3.36em!important}
+.hsub{font-size:1.05rem!important;margin:24px auto 0!important}
+.hcta{align-items:center;margin-top:32px;width:100%}.hbtn{width:100%;max-width:340px}
+.intro{margin-bottom:40px}.intro .lead{font-size:16px}
+}
+@media (max-width:768px){.herotext .badge{order:1!important}.herotext h1{order:2!important}.hsub{order:3!important}.hcta{order:4!important}}
+.n2{top:auto!important;bottom:70px!important}
