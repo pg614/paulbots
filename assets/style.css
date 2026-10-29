@@ -217,3 +217,11 @@ html[data-theme=light] .hlink{color:#2563eb}
 }
 @media (max-width:768px){.herotext .badge{order:1!important}.herotext h1{order:2!important}.hsub{order:3!important}.hcta{order:4!important}}
 .n2{top:auto!important;bottom:70px!important}
+.more-caps{margin-top:64px}.more-caps h3{font-size:1.25rem;color:var(--head);margin:0 0 24px;font-weight:700}
+.capgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.cap{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:12px;color:#0f172a;font-weight:500;font-size:.95rem;text-decoration:none}
+.cap .icon{width:34px;height:34px;flex:0 0 34px;margin:0!important;border-radius:9px;background:#eff6ff;color:#2563eb;display:flex;align-items:center;justify-content:center}.cap .icon svg{width:18px;height:18px}
+.capx{border-color:#bfdbfe;background:#f5f9ff;color:#1d4ed8;font-weight:600}.capx:hover{border-color:#2563eb}
+.capnote{color:#64748b;font-size:.88rem;margin-top:18px}
+@media (max-width:960px){.capgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.cap{padding:12px;gap:10px;font-size:.9rem}.more-caps h3{font-size:1.15rem}}
