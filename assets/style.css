@@ -87,3 +87,6 @@ html:not(.js) .typer .typed{display:none}
 /* WebKit-safe solid highlight (no background-clip:text) */
 .hw{display:inline-block;padding:0 .2em;border-radius:.2em;background-color:#2563eb;background-image:linear-gradient(120deg,#2563eb,#0ea5e9);color:#fff;-webkit-text-fill-color:#fff;box-shadow:none;-webkit-box-decoration-break:clone;box-decoration-break:clone;min-width:.4em;line-height:1.1}
 .typer .typed .caret{display:inline-block}
+.badge{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding:3px 3px 3px 12px;border-radius:999px;border:1px solid rgba(96,165,250,.35);background:rgba(15,30,70,.7);color:#93c5fd;font-size:.8rem;font-weight:600;margin-bottom:18px}
+.badge-in{display:inline-block;padding:3px 10px;border-radius:999px;background-color:#2563eb;background-image:linear-gradient(120deg,#2563eb,#0ea5e9);color:#fff;-webkit-text-fill-color:#fff}
+@media (max-width:380px){.badge{font-size:.72rem}}
