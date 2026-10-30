@@ -1,0 +1,24 @@
+# PaulBots
+
+> PaulBots builds custom AI bots for small businesses that answer calls, follow up with leads, help book consultations, and handle everyday busywork. PaulBots is a brand of Paul Graves LLC / Graves AI Solutions, run by Paul Graves in Columbus, Ohio.
+
+Tagline: Your Business. Your Bots. Less Busywork. You can call the AI demo line at 888-772-2820 or talk to it in the browser on the homepage.
+
+## Bots
+- [Our Bots](https://paulbots.com/bots/): Overview of every PaulBots AI helper
+- [Service Bot](https://paulbots.com/bots/service-bot.html): Answers calls and common questions day and night, using information you provide
+- [Sales Bot](https://paulbots.com/bots/sales-bot.html): Answers buyer questions and guides interested leads toward booking a consultation
+- [Follow-Up Bot](https://paulbots.com/bots/follow-up-bot.html): Follows up with leads and customers using messages you approve first
+- [Check-In Bot](https://paulbots.com/bots/check-in-bot.html): Sends appointment reminders and friendly customer check-ins
+- [Prospecting Bot](https://paulbots.com/bots/prospecting-bot.html): Helps reach and qualify new prospects using outreach you approve
+- [Custom AI Bot](https://paulbots.com/bots/custom-ai-bot.html): Custom bots for other needs, such as drafting review replies or gathering research
+
+## Company
+- [Pricing](https://paulbots.com/pricing.html): Introductory starting rates, a simple setup fee plus a monthly plan
+- [About](https://paulbots.com/about.html): A note from founder Paul Graves on why he started PaulBots
+- [Contact](https://paulbots.com/contact.html): Contact form to start building your bot
+- [Blog](https://blog.paulbots.com): Articles on using AI bots in a small business
+
+## Optional
+- [Privacy Policy](https://paulbots.com/privacy.html)
+- [Terms of Service](https://paulbots.com/terms.html)
