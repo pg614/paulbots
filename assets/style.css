@@ -272,3 +272,4 @@ html:not([data-theme=light]) .pg-pricing main p,html:not([data-theme=light]) .pg
 html:not([data-theme=light]) .pg-pricing .price.simple .lead{color:#60a5fa}
 html:not([data-theme=light]) .pg-pricing .card{background:var(--navy2);border-color:rgba(255,255,255,.1)}
 html:not([data-theme=light]) .pg-pricing input,html:not([data-theme=light]) .pg-pricing textarea{background:#0b1630;color:#fff;border-color:rgba(255,255,255,.18)}
+html:not([data-theme=light]) .pg-pricing .consent,html:not([data-theme=light]) .pg-pricing .consent span{color:#cbd5e1}
