@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Audit prepared for Classic Air by PaulBots</title><meta name="robots" content="noindex,nofollow">
+<style>
+:root{--ink:#14172b;--mut:#5b6078;--brand:#5b3df5;--bg:#f5f4fb;--card:#fff;--warn:#b45309;--ok:#047857}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+.top{background:var(--ink);color:#fff;padding:10px 16px;font-size:13px;text-align:center}.top b{color:#c4b8ff}
+header{background:linear-gradient(135deg,#5b3df5,#2a1b8f);color:#fff;padding:44px 20px 56px;text-align:center}
+header .logo{font-weight:800;letter-spacing:.5px;font-size:15px;opacity:.9}header h1{margin:10px 0 6px;font-size:clamp(26px,5vw,40px)}
+header p{margin:0 auto;max-width:620px;opacity:.9}
+main{max-width:900px;margin:-32px auto 40px;padding:0 16px}
+.card{background:var(--card);border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:0 4px 20px rgba(20,23,43,.07)}
+h2{margin:0 0 12px;font-size:22px}.mut{color:var(--mut);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.stat{border:1px solid #e6e3f5;border-radius:12px;padding:14px}.stat .n{font-size:28px;font-weight:800}.stat a{font-size:13px;color:var(--brand)}
+.issue{display:flex;gap:14px;padding:12px 0;border-top:1px solid #eee}.issue:first-of-type{border:0}
+.num{flex:none;width:32px;height:32px;border-radius:50%;background:#ede9fe;color:var(--brand);font-weight:800;display:grid;place-items:center}
+.est{display:inline-block;background:#fef3c7;color:var(--warn);font-size:11px;font-weight:800;padding:2px 7px;border-radius:6px;vertical-align:middle;letter-spacing:.5px}
+.demo{display:inline-block;background:#fee2e2;color:#b91c1c;font-size:12px;font-weight:800;padding:3px 9px;border-radius:6px}
+table{width:100%;border-collapse:collapse;font-size:15px}td{padding:9px 6px;border-top:1px solid #eee}td:last-child{text-align:right;font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.phone{border:10px solid #14172b;border-radius:28px;padding:16px;min-height:430px;background:#fafafa}
+.step{display:none}.step.on{display:block}.opt{display:block;width:100%;text-align:left;margin:6px 0;padding:11px 12px;border:1px solid #d9d5ee;border-radius:10px;background:#fff;font:inherit;cursor:pointer}
+.opt:hover,.opt.sel{border-color:var(--brand);background:#f3f0ff}
+.btn{display:inline-block;background:var(--brand);color:#fff;border:0;padding:12px 18px;border-radius:10px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}
+.btn.ghost{background:#fff;color:var(--brand);border:1px solid var(--brand)}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sms{max-width:85%;padding:10px 13px;border-radius:16px;margin:8px 0;font-size:14px}.in{background:#e5e5ea}.outm{background:#5b3df5;color:#fff;margin-left:auto}
+.call{background:#fee2e2;color:#991b1b;text-align:center;border-radius:10px;padding:8px;font-size:13px}
+.loom{border:2px dashed #c4b8ff;border-radius:12px;padding:30px;text-align:center;color:var(--mut)}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:0 16px 40px}a{color:var(--brand)}
+</style></head><body>
+<div class="top">This is an independent audit by <b>PaulBots</b>. It is not Classic Air's website and is not affiliated with Classic Air.</div>
+<header><div class="logo">🤖 PAULBOTS</div><h1>Prepared for Classic Air by PaulBots</h1>
+<p>A short, public-data look at how easy it is for a Columbus homeowner to find, reach, and book Classic Air, plus a demo of one fix.</p></header>
+<main>
+<section class="card"><h2>What customers already see</h2>
+<div class="stats">
+<div class="stat"><div class="n">4.9★</div>Google rating<br><a href="https://www.google.com/maps/search/Classic+Air+Columbus+OH" target="_blank" rel="noopener">Google listing ↗</a></div>
+<div class="stat"><div class="n">662</div>Google reviews<br><a href="https://www.google.com/maps/search/Classic+Air+Columbus+OH" target="_blank" rel="noopener">Google listing ↗</a></div>
+<div class="stat"><div class="n">0</div>owner replies in the newest ~20 reviews<br><a href="https://www.google.com/maps/search/Classic+Air+Columbus+OH" target="_blank" rel="noopener">Google listing ↗</a></div>
+<div class="stat"><div class="n">44/100</div>mobile speed score (Google Lighthouse)<br><a href="https://pagespeed.web.dev/analysis?url=https://www.classicairinc.com/" target="_blank" rel="noopener">Run it yourself ↗</a></div>
+</div>
+<p class="mut">Checked Oct 29–30, 2026. Google listing: no "Book" button, only "Call now". Website: <a href="https://www.classicairinc.com/">classicairinc.com</a> advertises 24/7 service; no online scheduler found. Nobody was called and no forms were submitted.</p></section>
+
+<section class="card"><h2>The top 3 things costing you jobs</h2>
+<div class="issue"><div class="num">1</div><div><b>There's no way to book online.</b> Your Google listing only offers "Call now". Someone searching at 9 PM who doesn't want to call has no next step, so they may try the next company.</div></div>
+<div class="issue"><div class="num">2</div><div><b>Missed calls have no safety net.</b> You promise 24/7 service. Any call that rings out or hits voicemail is a customer who may dial a competitor. An instant text-back keeps them with you.</div></div>
+<div class="issue"><div class="num">3</div><div><b>Your mobile site is slow, and reviews go unanswered.</b> The main content takes about 14 seconds to appear on a phone (score 44/100), and none of your newest ~20 reviews has a reply. Both are easy wins.</div></div>
+</section>
+
+<section class="card"><h2>What you're likely missing <span class="est">ESTIMATE</span></h2>
+<table>
+<tr><td>Jobs lost per month to no online booking / missed calls <span class="est">ESTIMATE</span></td><td>~18</td></tr>
+<tr><td>Revenue those jobs represent per month <span class="est">ESTIMATE</span></td><td>~$6,930</td></tr>
+<tr><td>Jobs a booking page + text-back could recover per month <span class="est">ESTIMATE</span></td><td>~9</td></tr>
+<tr><td>Recovered revenue per month <span class="est">ESTIMATE</span></td><td>~$3,465</td></tr>
+</table>
+<p class="mut"><b>Assumptions (not your real numbers):</b> ~18 would-be customers a month leave because they can't book online or their call isn't answered; an average ticket of ~$385 per service call; about half of those can be won back with online booking and an instant missed-call text. These are rough industry-style assumptions, not data from Classic Air. Your actual figures could be higher or lower.</p></section>
+
+<section class="card"><h2>Try the fix <span class="demo">DEMO, NOT LIVE</span></h2>
+<p class="mut">Click through it like a customer would. Nothing here books a real appointment or sends a real text.</p>
+<div class="grid2">
+<div><h3 style="margin:6px 0">1. Book-online page</h3><div class="phone" id="bk">
+<div class="step on" data-s="0"><b>Book with Classic Air</b> <span class="demo">DEMO</span><p class="mut">What do you need?</p>
+<button class="opt" data-v="AC repair">❄️ AC repair</button><button class="opt" data-v="Furnace repair">🔥 Furnace / heating repair</button><button class="opt" data-v="Maintenance tune-up">🛠️ Maintenance tune-up</button><button class="opt" data-v="New system estimate">🏠 New system estimate</button></div>
+<div class="step" data-s="1"><b>Pick a time</b><p class="mut" id="svc"></p><div class="slots">
+<button class="opt" data-v="Today 4–6 PM">Today 4–6 PM</button><button class="opt" data-v="Tomorrow 8–10 AM">Tmrw 8–10 AM</button><button class="opt" data-v="Tomorrow 12–2 PM">Tmrw 12–2 PM</button><button class="opt" data-v="Tomorrow 3–5 PM">Tmrw 3–5 PM</button></div>
+<p><a href="#" class="back">← Back</a></p></div>
+<div class="step" data-s="2"><b>Your details</b><p><input placeholder="Name" style="width:100%;padding:10px;margin:4px 0;border:1px solid #ccc;border-radius:8px"><input placeholder="Phone" style="width:100%;padding:10px;margin:4px 0;border:1px solid #ccc;border-radius:8px"><input placeholder="ZIP code" style="width:100%;padding:10px;margin:4px 0;border:1px solid #ccc;border-radius:8px"></p>
+<button class="btn" id="conf">Confirm booking</button> <a href="#" class="back">← Back</a></div>
+<div class="step" data-s="3" style="text-align:center"><div style="font-size:48px">✅</div><b>You're booked (demo)</b><p id="sum"></p><p class="mut">In a live version, Classic Air's office gets this instantly and the customer gets a confirmation text.</p><button class="btn ghost" id="again">Start over</button></div>
+</div></div>
+<div><h3 style="margin:6px 0">2. Missed-call text-back</h3><div class="phone">
+<div class="call">📞 Missed call from (614) 555-0142 · 9:12 PM</div>
+<div class="sms outm">Hi, this is Classic Air. Sorry we missed your call! Want to book a visit? Pick a time here: [booking link]. Or reply with what's going on and we'll get right back to you. (Demo message)</div>
+<div class="sms in" id="r1" style="display:none">Our AC stopped working, house is 84°</div>
+<div class="sms outm" id="r2" style="display:none">Sorry to hear that! We can get a tech out tomorrow 8–10 AM. Reply YES to lock it in. (Demo)</div>
+<p style="text-align:center"><button class="btn ghost" id="play">▶ Show the customer reply</button></p>
+<p class="mut" style="font-size:12px">Sample phone number and wording are made up for this demo. <span class="demo">DEMO, NOT LIVE</span></p></div></div>
+</div></section>
+
+<section class="card"><h2>A quick walkthrough video</h2>
+<div class="loom" id="loom"><!-- PAUL: replace this div's content with your Loom embed iframe -->
+🎥 [LOOM VIDEO PLACEHOLDER: Paul, paste your Loom embed code here]</div></section>
+
+<section class="card" style="text-align:center"><h2>Want this working for Classic Air?</h2>
+<p>I can set up the booking page and missed-call text-back using your real services and service area. No commitment to look.</p>
+<p><a class="btn" href="mailto:paulgravesjr@gmail.com?subject=Classic%20Air%20audit">Email Paul</a> <a class="btn ghost" href="tel:614-580-1277">Call or text Paul</a></p>
+<p class="mut">Paul Graves · PaulBots · paulgravesjr@gmail.com · 614-580-1277 · https://paulbots.com</p></section>
+</main>
+<footer>Prepared by PaulBots, independent of Classic Air. Stats come from public sources linked above and were checked Oct 2026. Dollar figures are estimates.</footer>
+<script>
+const steps=[...document.querySelectorAll('#bk .step')];let st=0,d={};
+const go=n=>{st=n;steps.forEach((s,i)=>s.classList.toggle('on',i==n))};
+steps[0].querySelectorAll('.opt').forEach(b=>b.onclick=()=>{d.s=b.dataset.v;document.getElementById('svc').textContent=d.s;go(1)});
+steps[1].querySelectorAll('.opt').forEach(b=>b.onclick=()=>{d.t=b.dataset.v;go(2)});
+document.querySelectorAll('.back').forEach(a=>a.onclick=e=>{e.preventDefault();go(st-1)});
+document.getElementById('conf').onclick=()=>{document.getElementById('sum').textContent=d.s+' · '+d.t;go(3)};
+document.getElementById('again').onclick=()=>go(0);
+document.getElementById('play').onclick=function(){r1.style.display='block';setTimeout(()=>r2.style.display='block',700);this.style.display='none'};
+</script></body></html>
