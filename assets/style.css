@@ -263,3 +263,12 @@ html[data-theme=light] .portrait img{border-color:#e2e8f0;box-shadow:0 16px 36px
 
 .hbtns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 @media (max-width:768px){.hbtns{flex-direction:column;width:100%;align-items:center}}
+
+.price.simple{max-width:520px;margin:40px auto 0;text-align:center;align-items:center;display:flex;flex-direction:column;gap:6px;padding:40px 32px}
+.price.simple .lead{font-weight:600;color:var(--blue);margin:0}.price.simple .amt{font-size:2.6rem}.price.simple .for{margin-top:14px;font-size:1.05rem}.price.simple .also{color:var(--ink);margin-bottom:18px}.price.simple .btn{margin-top:8px}
+html:not([data-theme=light]) body.pg-pricing{background:var(--navy);color:#cbd5e1}
+html:not([data-theme=light]) .pg-pricing main h1,html:not([data-theme=light]) .pg-pricing main h2,html:not([data-theme=light]) .pg-pricing main h3,html:not([data-theme=light]) .pg-pricing .amt{color:#fff}
+html:not([data-theme=light]) .pg-pricing main p,html:not([data-theme=light]) .pg-pricing main label,html:not([data-theme=light]) .pg-pricing .price.simple .also{color:#cbd5e1}
+html:not([data-theme=light]) .pg-pricing .price.simple .lead{color:#60a5fa}
+html:not([data-theme=light]) .pg-pricing .card{background:var(--navy2);border-color:rgba(255,255,255,.1)}
+html:not([data-theme=light]) .pg-pricing input,html:not([data-theme=light]) .pg-pricing textarea{background:#0b1630;color:#fff;border-color:rgba(255,255,255,.18)}
