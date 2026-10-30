@@ -12,6 +12,7 @@ if(f)f.addEventListener('submit',async ev=>{ev.preventDefault();const m=f.queryS
  if(!ep||ep.startsWith('PLACEHOLDER')){console.warn('Form endpoint not connected yet',data);m.textContent='Thanks! Our online form is being connected. For the fastest reply, please call 888-772-2820.';return}
  try{const r=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)});
   const j=await r.json().catch(()=>({}));if(!r.ok||String(j.success)!=='true')throw 0; // FormSubmit returns "false" as a string on errors
+  if(window.gtag)gtag('event','generate_lead',{form:'contact'});
   f.reset();m.className='formmsg ok';m.textContent="Thanks! We got your request and Paul will be in touch soon."}catch{m.className='formmsg err';m.textContent="Sorry, that didn't go through. Please try again, or call 888-772-2820."}});
 // Hero typewriter. Only textContent of persistent spans changes; the .hw highlight span is static HTML.
 (()=>{const h=document.querySelector('.typer');if(!h)return;const q=s=>h.querySelector(s);
@@ -35,3 +36,7 @@ function open(e){last=e&&e.currentTarget;if(!f.firstChild){var i=document.create
 function close(){m.hidden=true;document.body.style.overflow='';f.innerHTML='';if(last)last.focus()}
 document.querySelectorAll('.orbopen').forEach(function(b){b.addEventListener('click',open)});
 m.querySelector('.orbclose').addEventListener('click',close);m.addEventListener('click',function(e){if(e.target===m)close()});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!m.hidden)close()})})();
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a,button');if(!a||!window.gtag)return;var h=a.getAttribute('href')||'',t=(a.textContent||'').trim().slice(0,60);
+if(h.indexOf('tel:')===0)gtag('event','click_call',{link_text:t,page:location.pathname});
+else if(/orb|talk in browser|try our ai/i.test(t+' '+(a.className||'')))gtag('event','click_talk_ai',{link_text:t,page:location.pathname});
+else if(/build|contact/i.test(t)||/contact\.html|#build/.test(h))gtag('event','click_contact',{link_text:t,page:location.pathname});},true);
