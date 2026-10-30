@@ -4,14 +4,15 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 // Prefill bot from ?bot=
 const p=new URLSearchParams(location.search).get('bot');const f=document.getElementById('leadform');
 if(f&&p){f.bot.value=p;f.task.value=f.task.value||`I'm interested in the ${p}.`}
-// Lead form: posts JSON to window.PAULBOTS_CONFIG.formEndpoint (placeholder until a form service is connected)
+// Lead form: posts JSON to window.PAULBOTS_CONFIG.formEndpoint (FormSubmit AJAX)
 if(f)f.addEventListener('submit',async ev=>{ev.preventDefault();const m=f.querySelector('.formmsg');
  if(!f.checkValidity()){m.textContent='Please fill in your name, business, email, task, and check the consent box.';f.reportValidity();return}
- if(f.website.value)return; // honeypot
+ if(f._honey.value)return; // honeypot (FormSubmit also ignores _honey)
  const ep=(window.PAULBOTS_CONFIG||{}).formEndpoint;const data=Object.fromEntries(new FormData(f));
  if(!ep||ep.startsWith('PLACEHOLDER')){console.warn('Form endpoint not connected yet',data);m.textContent='Thanks! Our online form is being connected. For the fastest reply, please call 888-772-2820.';return}
  try{const r=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)});
-  if(!r.ok)throw 0;f.reset();m.textContent="Thanks! We got your request and will be in touch soon."}catch{m.textContent='Sorry, something went wrong. Please call 888-772-2820.'}});
+  const j=await r.json().catch(()=>({}));if(!r.ok||String(j.success)!=='true')throw 0; // FormSubmit returns "false" as a string on errors
+  f.reset();m.className='formmsg ok';m.textContent="Thanks! We got your request and Paul will be in touch soon."}catch{m.className='formmsg err';m.textContent="Sorry, that didn't go through. Please try again, or call 888-772-2820."}});
 // Hero typewriter. Only textContent of persistent spans changes; the .hw highlight span is static HTML.
 (()=>{const h=document.querySelector('.typer');if(!h)return;const q=s=>h.querySelector(s);
  const W=['Everything','Sales','Service','Follow-Up','Check-Ins','Prospecting'],PRE='Stop Doing ',POST=' Yourself.';
