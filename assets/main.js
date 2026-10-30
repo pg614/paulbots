@@ -40,3 +40,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 if(h.indexOf('tel:')===0)gtag('event','click_call',{link_text:t,page:location.pathname});
 else if(/orb|talk in browser|try our ai/i.test(t+' '+(a.className||'')))gtag('event','click_talk_ai',{link_text:t,page:location.pathname});
 else if(/build|contact/i.test(t)||/contact\.html|#build/.test(h))gtag('event','click_contact',{link_text:t,page:location.pathname});},true);
+
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.chatopen');if(!b)return;if(window.gtag)gtag('event','click_chat',{page:location.pathname});
+function find(r){var x=r.querySelector('[aria-label="Open Assistant"]');if(x)return x;var all=r.querySelectorAll('*');for(var i=0;i<all.length;i++){if(all[i].shadowRoot){x=find(all[i].shadowRoot);if(x)return x}}return null}
+var f=find(document);if(f)f.click();else location.href='/contact.html';});

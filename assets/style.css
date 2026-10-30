@@ -260,3 +260,6 @@ html[data-theme=light] .portrait img{border-color:#e2e8f0;box-shadow:0 16px 36px
 .aboutwrap{position:relative;z-index:2}.hero::before,.hero::after{pointer-events:none}
 @media (max-width:768px){.aboutcta .btn{height:auto;min-height:52px;padding:12px 16px;white-space:nowrap;font-size:.95rem}}
 .formmsg.ok{color:#16a34a}.formmsg.err{color:#dc2626}
+
+.hbtns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+@media (max-width:768px){.hbtns{flex-direction:column;width:100%;align-items:center}}
