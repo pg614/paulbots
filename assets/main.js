@@ -44,3 +44,31 @@ else if(/build|contact/i.test(t)||/contact\.html|#build/.test(h))gtag('event','c
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.chatopen');if(!b)return;if(window.gtag)gtag('event','click_chat',{page:location.pathname});
 function find(r){var x=r.querySelector('[aria-label="Open Assistant"]');if(x)return x;var all=r.querySelectorAll('*');for(var i=0;i<all.length;i++){if(all[i].shadowRoot){x=find(all[i].shadowRoot);if(x)return x}}return null}
 var f=find(document);if(f)f.click();else location.href='/contact.html';});
+
+/* Retell widget add-on: dark panel + refocus input (inspects widget's shadow DOM; safe no-op if Retell changes markup) */
+(function(){
+var CSS='.pbdark [class*="_innerShell_"],.pbdark [class*="_conversationPanel_"],.pbdark [class*="_messages_"]{background:#0f172a!important;color:#e2e8f0!important}'+
+'.pbdark [class*="_window_"]{background:#0f172a!important;border-color:#1e293b!important;color-scheme:dark}'+
+'.pbdark header{background:#111c33!important;border-bottom:1px solid #1e293b!important}'+
+'.pbdark header svg path[fill="#00122E"]{fill:#e2e8f0!important}.pbdark header svg path[stroke="#00122E"]{stroke:#e2e8f0!important}.pbdark header button{color:#e2e8f0!important}'+
+'.pbdark [class*="_agent_"][class*="_message_"]{background:#1e293b!important;color:#e2e8f0!important}'+
+'.pbdark [class*="_user_"][class*="_message_"]{background:#2563eb!important;color:#fff!important}'+
+'.pbdark [class*="_inputRow_"]{background:#0f172a!important;border-color:#1e293b!important}'+
+'.pbdark [class*="_inputShell_"]{background:#1e293b!important;border-color:#334155!important}'+
+'.pbdark textarea{background:transparent!important;color:#f1f5f9!important;caret-color:#93c5fd}.pbdark [class*="_inputPlaceholder_"]{color:#94a3b8!important}'+
+'.pbdark [class*="_poweredBy"]{color:#94a3b8!important}.pbdark [class*="_poweredBy"] a{color:#93c5fd!important}'+
+'.pbdark [class*="_drawer"],.pbdark [class*="_history"]{background:#0f172a!important;color:#e2e8f0!important}';
+var fine=window.matchMedia&&matchMedia('(pointer:fine)').matches;
+function isDark(){return document.documentElement.getAttribute('data-theme')!=='light'}
+function roots(r,o){o=o||[];var a=r.querySelectorAll('*');for(var i=0;i<a.length;i++)if(a[i].shadowRoot){o.push(a[i].shadowRoot);roots(a[i].shadowRoot,o)}return o}
+var ft;function focusSoon(sr){if(!fine)return;clearTimeout(ft);ft=setTimeout(function(){var w=sr.querySelector('[class*="_windowOpen_"]'),t=sr.querySelector('textarea');if(!w||!t||t.disabled||sr.activeElement===t)return;var ae=document.activeElement;if(ae&&ae!==document.body&&!ae.shadowRoot&&/INPUT|TEXTAREA|SELECT/.test(ae.tagName))return;t.focus({preventScroll:true})},250)}
+function setup(sr){var m=sr.getElementById&&sr.getElementById('widget-mount-point');if(!m)return;
+if(!sr.__pb){sr.__pb=1;var s=document.createElement('style');s.textContent=CSS;sr.appendChild(s);
+new MutationObserver(function(){var mp=sr.querySelector('[class*="_messages_"]');if(mp)focusSoon(sr)}).observe(m,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['disabled']});
+sr.addEventListener('submit',function(){focusSoon(sr)},true)}
+m.classList.toggle('pbdark',isDark())}
+function scan(){roots(document).forEach(setup)}
+var tries=0,iv=setInterval(function(){scan();if(++tries>40)clearInterval(iv)},500);
+new MutationObserver(scan).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+document.addEventListener('click',function(){setTimeout(scan,300)},true);
+})();
