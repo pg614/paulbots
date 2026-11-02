@@ -276,3 +276,12 @@ html:not([data-theme=light]) .pg-pricing .consent,html:not([data-theme=light]) .
 .faq details{border:1px solid rgba(127,127,127,.25);border-radius:12px;padding:14px 18px;margin:10px 0}
 .faq summary{cursor:pointer;font-weight:600}
 .faq details p{margin:10px 0 0}
+html:not([data-theme=light]) body.pg-lp{background:var(--navy);color:#cbd5e1}
+html:not([data-theme=light]) .pg-lp main h1,html:not([data-theme=light]) .pg-lp main h2,html:not([data-theme=light]) .pg-lp main h3,html:not([data-theme=light]) .pg-lp .tag,html:not([data-theme=light]) .pg-lp .faq summary{color:#fff}
+html:not([data-theme=light]) .pg-lp main p,html:not([data-theme=light]) .pg-lp main li,html:not([data-theme=light]) .pg-lp main label{color:#cbd5e1}
+html:not([data-theme=light]) .pg-lp main a:not(.btn){color:#60a5fa}
+html:not([data-theme=light]) .pg-lp .card,html:not([data-theme=light]) .pg-lp .note,html:not([data-theme=light]) .pg-lp .faq details{background:var(--navy2);border-color:rgba(255,255,255,.1)}
+html:not([data-theme=light]) .pg-lp .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+html:not([data-theme=light]) .pg-lp input,html:not([data-theme=light]) .pg-lp textarea{background:#0b1630;color:#fff;border-color:rgba(255,255,255,.18)}
+html:not([data-theme=light]) .pg-lp .consent,html:not([data-theme=light]) .pg-lp .consent span{color:#cbd5e1}
+.pg-lp .botpage .lead{margin-left:0;margin-right:0}
