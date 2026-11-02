@@ -44,7 +44,7 @@ form.card:hover{transform:none}input,textarea{width:100%;margin-top:6px;padding:
 .checks{list-style:none;padding:0}.checks li{padding:7px 0 7px 32px;position:relative}.checks li:before{content:"";position:absolute;left:0;top:11px;width:18px;height:18px;border-radius:50%;background:var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/14px no-repeat}
 .botin{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}.back{text-decoration:none;font-weight:500;font-size:.92rem}
 .ctaband{background:linear-gradient(120deg,#1e3a8a,var(--blue));color:#dbeafe;padding:72px 0}.ctaband h2{color:#fff;margin:0 0 .2em}.ctain{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}.ctaband .btn:not(.outline){background:#fff;color:var(--navy);border-color:#fff}
-footer{background:var(--navy);color:#94a3b8;padding:64px 0 24px}.foot{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px}.foot b{color:#fff;font-weight:600;font-size:.9rem;display:block;margin-bottom:10px}.foot a{display:block;text-decoration:none;color:#94a3b8;margin:6px 0;font-size:.92rem}.foot a:hover{color:#fff}.foot .logo{display:flex;color:#fff}.copy{margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
+footer{background:var(--navy);color:#94a3b8;padding:64px 0 24px}.foot{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}.foot b{color:#fff;font-weight:600;font-size:.9rem;display:block;margin-bottom:10px}.foot a{display:block;text-decoration:none;color:#94a3b8;margin:6px 0;font-size:.92rem}.foot a:hover{color:#fff}.foot .logo{display:flex;color:#fff}.copy{margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
 .legal h3{margin-top:1.8em}
 .float{position:fixed;right:20px;bottom:20px;z-index:30;display:flex;align-items:center;gap:8px;background:var(--navy);color:#fff;text-decoration:none;font-weight:600;font-size:.92rem;padding:7px 16px 7px 7px;border-radius:999px;box-shadow:0 10px 30px rgba(15,23,42,.35);border:1px solid rgba(255,255,255,.12)}
 .float .icon{width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;border:0}.float .icon svg{width:17px}
@@ -273,3 +273,6 @@ html:not([data-theme=light]) .pg-pricing .price.simple .lead{color:#60a5fa}
 html:not([data-theme=light]) .pg-pricing .card{background:var(--navy2);border-color:rgba(255,255,255,.1)}
 html:not([data-theme=light]) .pg-pricing input,html:not([data-theme=light]) .pg-pricing textarea{background:#0b1630;color:#fff;border-color:rgba(255,255,255,.18)}
 html:not([data-theme=light]) .pg-pricing .consent,html:not([data-theme=light]) .pg-pricing .consent span{color:#cbd5e1}
+.faq details{border:1px solid rgba(127,127,127,.25);border-radius:12px;padding:14px 18px;margin:10px 0}
+.faq summary{cursor:pointer;font-weight:600}
+.faq details p{margin:10px 0 0}

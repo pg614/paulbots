@@ -22,3 +22,7 @@ Tagline: Making AI easy, friendly and human. You can call the AI demo line at 88
 ## Optional
 - [Privacy Policy](https://paulbots.com/privacy.html)
 - [Terms of Service](https://paulbots.com/terms.html)
+
+## Industry pages
+- AI receptionist for HVAC, plumbers, dentists, med spas, law firms: https://paulbots.com/ai-receptionist-hvac/ (etc.), each with a /columbus/ variant
+- Columbus, OH hub: https://paulbots.com/columbus/
