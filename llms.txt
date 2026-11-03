@@ -14,7 +14,7 @@ Tagline: Making AI easy, friendly and human. You can call the AI demo line at 88
 - [Custom AI Bot](https://paulbots.com/bots/custom-ai-bot.html): Custom bots for other needs, such as drafting review replies or gathering research
 
 ## Company
-- [Pricing](https://paulbots.com/pricing.html): Introductory starting rates, a simple setup fee plus a monthly plan
+- [Pricing](https://paulbots.com/pricing.html): Plans starting at only $199/month
 - [About](https://paulbots.com/about.html): A note from founder Paul Graves on why he started PaulBots
 - [Contact](https://paulbots.com/contact.html): Contact form to start building your bot
 - [Blog](https://blog.paulbots.com): Articles on using AI bots in a small business
