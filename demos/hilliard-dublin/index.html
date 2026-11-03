@@ -1,0 +1,65 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demo: AI guide for Hilliard-Dublin Heating & Air</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,sans-serif;color:#1b2430;background:#f4f6f9}
+.demo{background:#111;color:#ffd54a;font-size:12px;text-align:center;padding:6px}
+header{background:#0b3d6e;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+header b{font-size:18px}header a{color:#fff;font-weight:700;text-decoration:none;background:#e4572e;padding:8px 12px;border-radius:6px}
+#qa{max-width:720px;margin:16px auto;background:#fff;border-radius:14px;box-shadow:0 4px 20px rgba(0,0,0,.12);overflow:hidden}
+#qa h2{margin:0;padding:14px 16px;background:#e4572e;color:#fff;font-size:20px}#qa h2 small{display:block;font-size:12px;font-weight:400;opacity:.9}
+#log{height:300px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.m{max-width:85%;padding:9px 12px;border-radius:12px;line-height:1.4;font-size:15px}.bot{background:#eef2f7;align-self:flex-start}.me{background:#0b3d6e;color:#fff;align-self:flex-end}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 8px}.chips button{border:1px solid #0b3d6e;background:#fff;color:#0b3d6e;border-radius:16px;padding:6px 10px;font-size:13px}
+form.row{display:flex;border-top:1px solid #ddd}form.row input{flex:1;border:0;padding:14px;font-size:16px}form.row button{border:0;background:#0b3d6e;color:#fff;padding:0 18px;font-size:16px}
+.cb{display:flex;flex-direction:column;gap:6px;margin-top:6px}.cb input{padding:8px;font-size:15px;border:1px solid #ccc;border-radius:6px}.cb button{padding:9px;background:#e4572e;color:#fff;border:0;border-radius:6px;font-size:15px}
+section{max-width:720px;margin:0 auto;padding:8px 16px}section h3{color:#0b3d6e}footer{font-size:12px;color:#666;text-align:center;padding:20px}
+</style></head><body>
+<div class="demo">DEMO built by PaulBots — not the official site of Hilliard-Dublin Heating & Air. Answers come from their public website.</div>
+<header><b>Hilliard-Dublin Heating & Air</b><a href="tel:6144907520">Call (614) 490-7520</a></header>
+<div id="qa"><h2>Need a quick answer?<small>Ask our AI guide — no email required. It answers from our website and can set up a callback.</small></h2>
+<div id="log"></div>
+<div class="chips" id="chips"></div>
+<form class="row" id="f"><input id="q" placeholder="Type your question…" autocomplete="off"><button>Ask</button></form></div>
+<section><h3>Heating • Cooling • Heat Pumps • Air Quality</h3><p>Furnace, AC and heat pump repair, maintenance and installation for Dublin, Hilliard, Plain City, Columbus and surrounding counties. NATE-certified techs, 24-hour emergency repairs, in-house financing. OH HVAC# 48904 · 7243 Sawmill Rd. #205B, Dublin, OH 43016.</p></section>
+<footer>Demo built by PaulBots · AI guide may make mistakes; confirm details with the office.</footer>
+<script>
+const PH='(614) 490-7520';
+const KB=[
+{id:'emergency',p:3,k:['emergency','24 hour','24/7','24-hour','tonight','right now','middle of the night','10 pm','10pm','no heat','not working','stopped working','quit','broke','broken','died','leak','urgent','asap','freezing'],a:`Yes — they offer 24-hour emergency furnace, heat pump and HVAC repairs, plus 24-hour AC repairs in summer, and same-day scheduling. For an emergency, call ${PH} now, or leave your name and number for a callback.`,cb:1},
+{id:'financing',p:3,k:['financ','finace','financ','fiance','payment plan','pay over time','monthly payment','payments','credit','loan','afford'],a:'Yes, in-house financing: easy application, manageable monthly payments, quick decisions with approved credit, and multiple offers from several lenders. Want someone to walk you through options?',cb:1},
+{id:'price',p:2,k:['cost','price','how much','quote','estimate','expensive','cheap','charge'],a:`I don't want to quote a number that's wrong for your home — prices depend on the system and the house. They offer a Best Price Guarantee and a free quote. Leave your name and phone for a quick callback, or call ${PH}.`,cb:1},
+{id:'license',p:2,k:['certif','licens','licenced','nate','qualified','insured','bonded'],a:'Technicians are NATE-certified and state licensed. Ohio HVAC license #48904.'},
+{id:'hours',p:2,k:['hour','open','close','sunday','saturday','weekend','holiday','what time'],a:`Phones are answered day or night, including weekends and holidays, with extended support hours, and there's 24-hour emergency service. Call ${PH} or request a callback.`,cb:1},
+{id:'area',p:1,k:['service area','do you serve','do you service','come to','areas','where do you','dublin','hilliard','plain city','columbus','county','madison','fairfield','morrow','franklin'],a:'They serve Dublin, Hilliard, Plain City and Columbus — all of Franklin County, plus Madison, Fairfield and Morrow Counties.'},
+{id:'maint',p:2,k:['maintenance','tune','protect plan','membership','member','club','plan'],a:'They offer Protect Plans (maintenance memberships) plus furnace, AC and heat pump tune-ups. Want details?',cb:1},
+{id:'iaq',p:1,k:['air quality','purif','iwave','i-wave','uv light','filter','humidif','dehumid','mold','allerg','radon','carbon monoxide','thermostat'],a:'Indoor air quality: iWave-R air cleaner, Blue Tube UV lights, filters, humidifiers, dehumidifiers and smart thermostats, plus testing for carbon monoxide, radon and other gases.'},
+{id:'deals',p:1,k:['deal','coupon','discount','special','promo'],a:'There are online deals: book online or by phone, show the coupon to your technician, and save.'},
+{id:'guarantee',p:1,k:['guarantee','warranty','satisf'],a:'100% customer satisfaction guarantee on all services and routine maintenance, plus a Best Price Guarantee on leading products.'},
+{id:'address',p:1,k:['address','located','office','location'],a:'7243 Sawmill Rd. #205B, Dublin, OH 43016.'},
+{id:'brand',p:1,k:['brand','carrier','trane','lennox','goodman','rheem'],a:'They service all brands. For which brands they install, the office can confirm — want a callback?',cb:1},
+{id:'heatpump',p:1,k:['heat pump','heatpump'],a:'Heat pump repair, maintenance and installation, including 24-hour emergency heat pump repair in winter.',cb:1},
+{id:'furnace',p:0,k:['furnace','furnance','furnac','heater','heating'],a:'Furnace repair, maintenance and new installation — any brand, any age, no matter who installed it. Certified, state-licensed techs.',cb:1},
+{id:'ac',p:0,k:[' ac ',' a/c','air condition','aircondition','cooling'],a:'AC repair, maintenance, installation and replacement across Greater Columbus, with extended summer support hours.',cb:1},
+{id:'book',p:1,k:['schedule','book','appointment','come out','send someone','technician'],a:'Happy to help you book. Leave your name and phone and the team will call to schedule, or call '+PH+'.',cb:1},
+{id:'contact',p:0,k:['phone','call','number','contact'],a:`Call ${PH}.`}];
+const SERVED=['dublin','hilliard','plain city','columbus','franklin','madison','fairfield','morrow'];
+const OTHER_TOWNS=['marysville','delaware','powell','westerville','lewis center','newark','lancaster','grove city','worthington','upper arlington','gahanna','reynoldsburg','pickerington','london','mount vernon','zanesville','springfield','marion'];
+function norm(q){return ' '+q.toLowerCase().replace(/[^a-z0-9/ ]+/g,' ').replace(/\s+/g,' ').trim()+' '}
+function match(q){const s=norm(q);
+ // unlisted town → don't guess
+ if(OTHER_TOWNS.some(t=>s.includes(t)))return null;
+ let best=null,sc=0;for(const e of KB){let x=0;for(const k of e.k)if(s.includes(k))x+=k.length;if(x)x+=e.p*100;if(x>sc){sc=x;best=e}}
+ return best}
+const log=document.getElementById('log');
+function add(t,c){const d=document.createElement('div');d.className='m '+c;d.innerHTML=t;log.appendChild(d);log.scrollTop=1e6;return d}
+function callback(){const d=add(`<b>Request a callback</b><div class="cb"><input id="cn" placeholder="Your name"><input id="cp" type="tel" placeholder="Phone number"><input id="cw" placeholder="What's going on? (optional)"><button onclick="sendCB(this)">Call me back</button></div>`,'bot')}
+function sendCB(b){const n=document.getElementById('cn').value.trim(),p=document.getElementById('cp').value.trim();if(!n||p.replace(/\D/g,'').length<10){alert('Please add your name and a 10-digit phone.');return}
+const leads=JSON.parse(localStorage.getItem('pb_leads')||'[]');leads.push({n,p,w:document.getElementById('cw').value,t:new Date().toLocaleString()});localStorage.setItem('pb_leads',JSON.stringify(leads));
+b.parentNode.parentNode.innerHTML=`Thanks, ${n}! In the live version, the office gets this instantly by text/email and calls you at ${p}. <i>(Demo: lead saved on this phone only.)</i>`}
+function answer(q){const best=match(q);
+if(!best){add(`Good question — I don't want to guess. I can have someone from the office call you back, or call ${PH}.`,'bot');callback();return}
+add(best.a,'bot');if(best.cb)add('<button onclick="callback()" style="border:0;background:#e4572e;color:#fff;padding:8px 12px;border-radius:6px">Request a callback</button>','bot')}
+document.getElementById('f').onsubmit=e=>{e.preventDefault();const q=document.getElementById('q');if(!q.value.trim())return;add(q.value.replace(/</g,'&lt;'),'me');setTimeout(()=>answer(q.value),300);q.value=''};
+['My furnace stopped working','Do you serve Plain City?','Do you offer financing?','How much is a new AC?','Maintenance plans?'].forEach(t=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>{add(t,'me');setTimeout(()=>answer(t),300)};chips.appendChild(b)});
+add("Hi! I'm the AI guide for Hilliard-Dublin Heating & Air. Ask me anything about repairs, service area, financing or scheduling.",'bot');
+</script></body></html>
