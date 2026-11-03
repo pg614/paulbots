@@ -285,3 +285,9 @@ html:not([data-theme=light]) .pg-lp .btn.ghost{background:transparent;color:#fff
 html:not([data-theme=light]) .pg-lp input,html:not([data-theme=light]) .pg-lp textarea{background:#0b1630;color:#fff;border-color:rgba(255,255,255,.18)}
 html:not([data-theme=light]) .pg-lp .consent,html:not([data-theme=light]) .pg-lp .consent span{color:#cbd5e1}
 .pg-lp .botpage .lead{margin-left:0;margin-right:0}
+
+.proof .proofgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:24px}
+.proof .pcard{border:1px solid rgba(148,163,184,.35);border-radius:var(--r);padding:20px;background:rgba(148,163,184,.06)}
+.proof .pcard h3{margin:0 0 8px;color:inherit}.proof .pcard p{margin:0}
+.proof .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:24px}
+.proof blockquote{margin:0;border-left:3px solid var(--blue2);padding:12px 16px}
