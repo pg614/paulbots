@@ -291,3 +291,5 @@ html:not([data-theme=light]) .pg-lp .consent,html:not([data-theme=light]) .pg-lp
 .proof .pcard h3{margin:0 0 8px;color:inherit}.proof .pcard p{margin:0}
 .proof .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:24px}
 .proof blockquote{margin:0;border-left:3px solid var(--blue2);padding:12px 16px}
+main h2.h3{font-size:1.12rem;font-weight:600;letter-spacing:-.01em;margin:1em 0 .5em}
+.card h2.h3{margin:.9em 0 .25em}.legal h2.h3{margin-top:1.8em}
