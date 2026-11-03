@@ -293,3 +293,17 @@ html:not([data-theme=light]) .pg-lp .consent,html:not([data-theme=light]) .pg-lp
 .proof blockquote{margin:0;border-left:3px solid var(--blue2);padding:12px 16px}
 main h2.h3{font-size:1.12rem;font-weight:600;letter-spacing:-.01em;margin:1em 0 .5em}
 .card h2.h3{margin:.9em 0 .25em}.legal h2.h3{margin-top:1.8em}
+.buyers{font-weight:600;margin:.2em 0 1em;opacity:.9}
+.anchor{margin:.6em auto 0;max-width:560px}
+.founder .fcard{display:flex;gap:22px;align-items:center;border:1px solid rgba(127,127,127,.25);border-radius:16px;padding:20px}
+.founder .fphoto img{width:120px;height:150px;object-fit:cover;border-radius:12px;display:block}
+.founder h2.h3{margin-top:0}
+@media(max-width:600px){.founder .fcard{flex-direction:column;text-align:center}}
+.steps{margin-top:22px;text-align:left}.steps ol{padding-left:1.2em}.steps li{margin:.5em 0}
+.faqsec .faq{max-width:760px;margin:0 auto}
+.burger,.themetog{min-width:44px;min-height:44px}
+html:not([data-theme=light]) .pg-pricing .faq details{border-color:rgba(255,255,255,.15)}
+html:not([data-theme=light]) .pg-pricing .steps li,html:not([data-theme=light]) .pg-pricing .faq summary{color:#fff}
+.vs{width:100%;border-collapse:collapse}.vs th,.vs td{text-align:left;padding:10px;border-bottom:1px solid rgba(127,127,127,.25);vertical-align:top}
+html:not([data-theme=light]) .pg-lp .vs th,html:not([data-theme=light]) .pg-lp .vs td{color:#fff}
+@media(max-width:600px){.vs{font-size:.9rem}.vs th,.vs td{padding:6px}}
