@@ -373,3 +373,5 @@ html:not([data-theme=light]) .card,html:not([data-theme=light]) .pcard,html:not(
 html:not([data-theme=light]) footer{background:#0a1430}
 html:not([data-theme=light]) input,html:not([data-theme=light]) textarea,html:not([data-theme=light]) select{background:rgba(11,22,48,.75)}
 @media(max-width:900px){.herotext .badge{order:1!important}.herotext h1{order:2!important}.herotext .trustpill{order:3!important}.herotext>p.lead{order:4!important}.herotext .buyers{order:5!important}.herotext .hcta{order:6!important}}
+html:not([data-theme=light]) .buyers .rot{color:#7dd3fc!important;text-shadow:0 0 14px rgba(56,189,248,.45)}
+html:not([data-theme=light]) .buyers .rot.out{opacity:.35!important}
