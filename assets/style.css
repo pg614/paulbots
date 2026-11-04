@@ -397,3 +397,12 @@ html[data-theme=light] .who,html[data-theme=light] .mfoot,html[data-theme=light]
 html[data-theme=light] .extag,html[data-theme=light] .trustpill i{color:#1d4ed8!important}
 html[data-theme=light] .ctaband strong,html[data-theme=light] .ctaband b,html[data-theme=light] footer strong,html[data-theme=light] footer b,html[data-theme=light] .btn strong{color:inherit}
 html[data-theme=light] body{background-size:64px 64px,64px 64px,100% 100%}
+/* Contrast fixes (Nov 4 pm) */
+html .hotcard h2,html[data-theme=light] .hotcard h2,html[data-theme=light] .hotcard strong{color:#fff!important}
+html .hotcard p,html[data-theme=light] .hotcard p{color:#e2e8f0!important}
+html:not([data-theme=light]) .qs li{background:linear-gradient(180deg,rgba(30,48,96,.72),rgba(17,29,60,.78))!important;border-color:rgba(148,163,184,.18)!important;border-left:4px solid #3b82f6!important;color:#f1f5f9!important;backdrop-filter:blur(6px)}
+html .ctaband,html .ctaband h1,html .ctaband h2,html .ctaband h3,html .ctaband strong,html .ctaband b,html[data-theme=light] .ctaband h2,html[data-theme=light] .ctaband h3,html[data-theme=light] .ctaband strong{color:#fff!important}
+html .ctaband p,html .ctaband li,html .ctaband span:not(.btn),html[data-theme=light] .ctaband p{color:#e2e8f0!important}
+html .ctaband a:not(.btn){color:#fff!important}
+html .annbar,html .annbar a,html .annbar span,html .annbar b,html .annbar u,html[data-theme=light] .annbar b{color:#fff!important}
+html .msg .who,html .mfoot{color:#475569!important}
