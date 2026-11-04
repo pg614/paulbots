@@ -375,3 +375,8 @@ html:not([data-theme=light]) input,html:not([data-theme=light]) textarea,html:no
 @media(max-width:900px){.herotext .badge{order:1!important}.herotext h1{order:2!important}.herotext .trustpill{order:3!important}.herotext>p.lead{order:4!important}.herotext .buyers{order:5!important}.herotext .hcta{order:6!important}}
 html:not([data-theme=light]) .buyers .rot{color:#7dd3fc!important;text-shadow:0 0 14px rgba(56,189,248,.45)}
 html:not([data-theme=light]) .buyers .rot.out{opacity:.35!important}
+/* Dark-theme text contrast (Nov 4) */
+html:not([data-theme=light]) p,html:not([data-theme=light]) .lead,html:not([data-theme=light]) p.lead,html:not([data-theme=light]) li,html:not([data-theme=light]) dd,html:not([data-theme=light]) td{color:#cbd5e1}
+html:not([data-theme=light]) strong,html:not([data-theme=light]) b,html:not([data-theme=light]) .lead strong,html:not([data-theme=light]) p strong{color:#f8fafc}
+html:not([data-theme=light]) .more{color:#93c5fd}
+html:not([data-theme=light]) .ftd-win strong,html:not([data-theme=light]) .ftd-win b,html:not([data-theme=light]) .ftd-win p{color:#0f172a}
