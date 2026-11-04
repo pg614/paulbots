@@ -412,3 +412,6 @@ html .btn.hottrial:hover,html .btn.hottrial:focus-visible{background:linear-grad
 html[data-theme=light] .links{background:transparent!important}
 @media (max-width:860px){html[data-theme=light] .links{background:rgba(248,251,255,.96)!important;backdrop-filter:blur(12px);border-bottom:1px solid rgba(148,163,184,.25);box-shadow:0 12px 28px rgba(30,64,175,.08)}}
 @media (max-width:860px){html[data-theme=light] .links{background:#f5f9ff!important}}
+/* Pure bright orange (Paul prefers orange over red) */
+html .btn.hottrial,html .hotbadge,html[data-theme=light] .btn.hottrial,html[data-theme=light] .hotbadge{background:linear-gradient(90deg,#f97316,#ea580c)!important;color:#fff!important;border-color:transparent!important;font-weight:700!important;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+html .btn.hottrial:hover,html .btn.hottrial:focus-visible{background:linear-gradient(90deg,#ea580c,#c2410c)!important;color:#fff!important}
