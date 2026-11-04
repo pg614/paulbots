@@ -406,3 +406,9 @@ html .ctaband p,html .ctaband li,html .ctaband span:not(.btn),html[data-theme=li
 html .ctaband a:not(.btn){color:#fff!important}
 html .annbar,html .annbar a,html .annbar span,html .annbar b,html .annbar u,html[data-theme=light] .annbar b{color:#fff!important}
 html .msg .who,html .mfoot{color:#475569!important}
+/* Accessible hot orange (Nov 4): white text >= 4.8:1 */
+html .btn.hottrial,html .hotbadge,html[data-theme=light] .btn.hottrial,html[data-theme=light] .hotbadge{background:linear-gradient(90deg,#c2410c,#dc2626)!important;color:#fff!important;border-color:transparent!important}
+html .btn.hottrial:hover,html .btn.hottrial:focus-visible{background:linear-gradient(90deg,#9a3412,#b91c1c)!important;color:#fff!important}
+html[data-theme=light] .links{background:transparent!important}
+@media (max-width:860px){html[data-theme=light] .links{background:rgba(248,251,255,.96)!important;backdrop-filter:blur(12px);border-bottom:1px solid rgba(148,163,184,.25);box-shadow:0 12px 28px rgba(30,64,175,.08)}}
+@media (max-width:860px){html[data-theme=light] .links{background:#f5f9ff!important}}
