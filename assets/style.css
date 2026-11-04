@@ -380,3 +380,20 @@ html:not([data-theme=light]) p,html:not([data-theme=light]) .lead,html:not([data
 html:not([data-theme=light]) strong,html:not([data-theme=light]) b,html:not([data-theme=light]) .lead strong,html:not([data-theme=light]) p strong{color:#f8fafc}
 html:not([data-theme=light]) .more{color:#93c5fd}
 html:not([data-theme=light]) .ftd-win strong,html:not([data-theme=light]) .ftd-win b,html:not([data-theme=light]) .ftd-win p{color:#0f172a}
+/* ===== Light-mode sky theme (draft) ===== */
+#skybg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:none}
+html[data-theme=light] #skybg{display:block}
+html[data-theme=light] body{background-color:#eaf4ff;background-image:linear-gradient(180deg,#bfdbfe 0%,#dbeafe 22%,#eff6ff 50%,#f8fbff 100%),linear-gradient(rgba(37,99,235,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.05) 1px,transparent 1px);background-blend-mode:normal;background-size:100% 100%,64px 64px,64px 64px;background-attachment:fixed}
+html[data-theme=light] body{background-image:linear-gradient(rgba(37,99,235,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.055) 1px,transparent 1px),linear-gradient(180deg,#bfdbfe 0%,#dbeafe 22%,#eff6ff 50%,#f8fbff 100%)}
+html[data-theme=light] .hero,html[data-theme=light] body>section:not(.ctaband),html[data-theme=light] main>section{background:transparent!important}
+html[data-theme=light] .hero:before{opacity:0}
+html[data-theme=light] .band{background:rgba(255,255,255,.45)!important;border-color:rgba(148,163,184,.25)!important;backdrop-filter:blur(2px)}
+html[data-theme=light] .card,html[data-theme=light] .pcard,html[data-theme=light] .fcard,html[data-theme=light] .price,html[data-theme=light] .faq details,html[data-theme=light] .painlist>*,html[data-theme=light] .qs li,html[data-theme=light] .nos li{background:rgba(255,255,255,.82)!important;border-color:rgba(148,163,184,.3)!important;backdrop-filter:blur(8px);box-shadow:0 8px 28px rgba(30,64,175,.08)}
+html[data-theme=light] header.nav{background:rgba(255,255,255,.78);backdrop-filter:blur(10px)}
+html[data-theme=light] p,html[data-theme=light] li,html[data-theme=light] td{color:#334155}
+html[data-theme=light] h1,html[data-theme=light] h2,html[data-theme=light] h3,html[data-theme=light] strong,html[data-theme=light] b{color:#0f172a}
+@media (prefers-reduced-motion:reduce){#skybg{transition:none}}
+html[data-theme=light] .who,html[data-theme=light] .mfoot,html[data-theme=light] .hlink,html[data-theme=light] .micnote{color:#475569!important}
+html[data-theme=light] .extag,html[data-theme=light] .trustpill i{color:#1d4ed8!important}
+html[data-theme=light] .ctaband strong,html[data-theme=light] .ctaband b,html[data-theme=light] footer strong,html[data-theme=light] footer b,html[data-theme=light] .btn strong{color:inherit}
+html[data-theme=light] body{background-size:64px 64px,64px 64px,100% 100%}
