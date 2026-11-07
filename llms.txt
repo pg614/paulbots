@@ -1,22 +1,28 @@
 # PaulBots
 
-> PaulBots builds custom AI bots for small businesses that answer calls, follow up with leads, help book consultations, and handle everyday busywork. PaulBots is a brand of Paul Graves LLC / Graves AI Solutions, run by Paul Graves in Columbus, Ohio.
+> PaulBots builds custom AI bots that capture inbound leads, follow up on new inquiries, and reconnect with past prospects where you have permission to contact them. Net-new prospecting is a separate service from capturing people who already called, chatted, or visited. Phone answering supports lead capture. It is not the whole brand. PaulBots is a brand of Paul Graves LLC / Graves AI Solutions, run by Paul Graves in the Columbus, Ohio area, and also works with businesses elsewhere.
 
-Tagline: Making AI easy, friendly and human. You can call the AI demo line at 888-772-2820 or talk to it in the browser on the homepage.
+Tagline: Making AI easy, friendly and human. Plans starting at only $299/month. The free 30-day trial is a custom website lead bot. No credit card is required. It is not a free outbound or reactivation package.
 
-## Bots
+You can call the AI demo line at 888-772-2820 or talk to Aria in the browser on the homepage. Demo calls are a demonstration, not a fully configured client system.
+
+## Lead services
+- [Lead capture, follow-up, and reactivation](https://paulbots.com/leads/): How the services differ, including consent limits on reactivation
+- [Free 30-day trial](https://paulbots.com/free-trial/): Custom website lead bot only
+- [Sales Bot](https://paulbots.com/bots/sales-bot.html): Helps people who are already asking questions move toward a consultation
+- [Follow-Up Bot](https://paulbots.com/bots/follow-up-bot.html): Follows up on new leads with messages you approve
+- [Prospecting Bot](https://paulbots.com/bots/prospecting-bot.html): Net-new outreach to people who have not contacted you, using outreach you approve
+- [Service Bot](https://paulbots.com/bots/service-bot.html): Answers calls and chats and saves the inquiry so it can be followed up
+
+## Other bots
 - [Our Bots](https://paulbots.com/bots/): Overview of every PaulBots AI helper
-- [Service Bot](https://paulbots.com/bots/service-bot.html): Answers calls and common questions day and night, using information you provide
-- [Sales Bot](https://paulbots.com/bots/sales-bot.html): Answers buyer questions and guides interested leads toward booking a consultation
-- [Follow-Up Bot](https://paulbots.com/bots/follow-up-bot.html): Follows up with leads and customers using messages you approve first
-- [Check-In Bot](https://paulbots.com/bots/check-in-bot.html): Sends appointment reminders and friendly customer check-ins
-- [Prospecting Bot](https://paulbots.com/bots/prospecting-bot.html): Helps reach and qualify new prospects using outreach you approve
-- [Custom AI Bot](https://paulbots.com/bots/custom-ai-bot.html): Custom bots for other needs, such as drafting review replies or gathering research
+- [Check-In Bot](https://paulbots.com/bots/check-in-bot.html): Appointment reminders and customer check-ins
+- [Custom AI Bot](https://paulbots.com/bots/custom-ai-bot.html): Other tasks, scoped and tested with you
 
 ## Company
-- [Pricing](https://paulbots.com/pricing.html): Plans starting at only $299/month
-- [About](https://paulbots.com/about.html): A note from founder Paul Graves on why he started PaulBots
-- [Contact](https://paulbots.com/contact.html): Contact form to start building your bot
+- [Pricing](https://paulbots.com/pricing.html): Plans starting at only $299/month. Final pricing depends on usage, integrations, and how custom the bot is
+- [About](https://paulbots.com/about.html): A note from founder Paul Graves
+- [Contact](https://paulbots.com/contact.html): Consultation form. No payment is taken on this site
 - [Blog](https://blog.paulbots.com): Articles on using AI bots in a small business
 
 ## Optional
@@ -24,5 +30,6 @@ Tagline: Making AI easy, friendly and human. You can call the AI demo line at 88
 - [Terms of Service](https://paulbots.com/terms.html)
 
 ## Industry pages
-- AI receptionist for HVAC, plumbers, dentists, med spas, law firms: https://paulbots.com/ai-receptionist-hvac/ (etc.), each with a /columbus/ variant
-- Columbus, OH hub: https://paulbots.com/columbus/
+Phone answering pages for HVAC, plumbers, dentists, med spas, and law firms stay available as industry entry points. Each explains that call answering captures the inquiry and links to lead follow-up. Example: https://paulbots.com/ai-receptionist-hvac/ and its /columbus/ variant.
+Columbus, OH hub: https://paulbots.com/columbus/
+Website lead-bot examples: https://paulbots.com/forklift/ https://paulbots.com/pallet-racking/ https://paulbots.com/security-alarms/
