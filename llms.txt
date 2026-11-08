@@ -8,6 +8,8 @@ You can call the AI demo line at 888-772-2820 or talk to Aria in the browser on 
 
 ## Lead services
 - [Lead capture, follow-up, and reactivation](https://paulbots.com/leads/): How the services differ, including consent limits on reactivation
+- [AI assessment](https://paulbots.com/ai-assessment/): $999 value, free for a limited time. A business conversation and written priorities for where AI helps and where it does not. No obligation
+- [Lead reactivation](https://paulbots.com/lead-reactivation/): Campaigns for dormant inquiries, unfinished quotes, and past customers, built around the list, goals, and permission to contact them. The customer reviews the campaign before launch
 - [Free 30-day trial](https://paulbots.com/free-trial/): Custom website lead bot only
 - [Sales Bot](https://paulbots.com/bots/sales-bot.html): Helps people who are already asking questions move toward a consultation
 - [Follow-Up Bot](https://paulbots.com/bots/follow-up-bot.html): Follows up on new leads with messages you approve
