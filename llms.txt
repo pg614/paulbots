@@ -25,7 +25,7 @@ You can call the AI demo line at 888-772-2820 or talk to Aria in the browser on 
 - [Pricing](https://paulbots.com/pricing.html): Plans starting at only $299/month. Final pricing depends on usage, integrations, and how custom the bot is
 - [About](https://paulbots.com/about.html): A note from founder Paul Graves
 - [Contact](https://paulbots.com/contact.html): Consultation form. No payment is taken on this site
-- [Blog](https://blog.paulbots.com): Articles on using AI bots in a small business
+- [Blog](https://paulbots.com/blog/): Articles on using AI bots in a small business
 
 ## Optional
 - [Privacy Policy](https://paulbots.com/privacy.html)
