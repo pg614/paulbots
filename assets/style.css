@@ -434,3 +434,9 @@ html:not([data-theme=light]) .blogdate{color:#94a3b8}
 .post th,.post td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
 html:not([data-theme=light]) .post th,html:not([data-theme=light]) .post td{border-color:rgba(148,163,184,.28)}
 .feature{width:100%;max-height:420px;object-fit:cover;border-radius:14px;display:block;margin:18px 0 8px}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:.88rem;margin:0 0 14px;line-height:1.4}
+.crumbs a{font-weight:600;text-decoration:none}
+.crumbs .sep{color:#64748b}
+.crumbs [aria-current=page]{color:#475569}
+html:not([data-theme=light]) .crumbs .sep{color:#94a3b8}
+html:not([data-theme=light]) .crumbs [aria-current=page]{color:#cbd5e1}
