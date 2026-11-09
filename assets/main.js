@@ -41,9 +41,21 @@ if(h.indexOf('tel:')===0)gtag('event','click_call',{link_text:t,page:location.pa
 else if(/orb|talk in browser|try our ai/i.test(t+' '+(a.className||'')))gtag('event','click_talk_ai',{link_text:t,page:location.pathname});
 else if(/build|contact/i.test(t)||/contact\.html|#build/.test(h))gtag('event','click_contact',{link_text:t,page:location.pathname});},true);
 
-document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.chatopen');if(!b)return;if(window.gtag)gtag('event','click_chat',{page:location.pathname});
+/* Aria chat: show our launcher immediately and load the Retell widget once, on click or after the visitor starts using the page. */
+(function(){
+var STYLE='.pb-aria{position:fixed;right:16px;bottom:16px;z-index:35;display:inline-flex;align-items:center;gap:8px;background:#2563eb;color:#fff;font:600 15px/1 Inter,system-ui,sans-serif;padding:14px 18px;border:0;border-radius:999px;box-shadow:0 10px 24px rgba(37,99,235,.35);cursor:pointer}.pb-aria svg{display:block}.pb-aria[hidden]{display:none!important}@media(max-width:640px){.pb-aria{transition:opacity .25s}body.pb-heroin .pb-aria{opacity:0;visibility:hidden;pointer-events:none}}@media(prefers-reduced-motion:reduce){.pb-aria{transition:none}}';
+var st=document.createElement('style');st.textContent=STYLE;document.head.appendChild(st);
 function find(r){var x=r.querySelector('[aria-label="Open Assistant"]');if(x)return x;var all=r.querySelectorAll('*');for(var i=0;i<all.length;i++){if(all[i].shadowRoot){x=find(all[i].shadowRoot);if(x)return x}}return null}
-var f=find(document);if(f)f.click();else location.href='/contact.html';});
+function hide(){var b=document.getElementById('pb-aria');if(b&&document.getElementById('retell-widget-root'))b.hidden=true}
+var pendingOpen=false,promise=null,pumping=false;
+function pump(){if(pumping)return;pumping=true;var t0=Date.now();(function tick(){var f=find(document);if(f){hide();if(pendingOpen){pendingOpen=false;f.click()}pumping=false;return}if(Date.now()-t0<10000)setTimeout(tick,120);else{pumping=false;if(pendingOpen){pendingOpen=false;location.href='/contact.html'}}})()}
+function load(){if(promise)return promise;var cfg=document.getElementById('retell-widget');if(cfg&&cfg.type==='module'){promise=Promise.resolve();return promise}promise=new Promise(function(resolve,reject){var s=document.createElement('script');s.id='retell-widget';s.type='module';s.src=(cfg&&cfg.getAttribute('src'))||'https://dashboard.retellai.com/retell-widget-v2.js';['data-public-key','data-agent-id','data-title','data-bot-name','data-fab-text','data-color'].forEach(function(a){var v=cfg&&cfg.getAttribute(a);if(v)s.setAttribute(a,v)});s.onload=function(){resolve()};s.onerror=function(){promise=null;reject(new Error('retell'))};if(cfg&&cfg.parentNode)cfg.parentNode.replaceChild(s,cfg);else document.body.appendChild(s)});return promise}
+window.pbLoadRetell=function(open){if(open)pendingOpen=true;return load().then(pump).catch(function(){if(pendingOpen){pendingOpen=false;location.href='/contact.html'}})}
+new MutationObserver(hide).observe(document.documentElement,{childList:true,subtree:true});
+var armed=false;function arm(){if(armed)return;armed=true;var go=function(){window.pbLoadRetell(false)};if(window.requestIdleCallback)requestIdleCallback(go,{timeout:4000});else setTimeout(go,4000)}
+['pointerdown','keydown','touchstart','scroll'].forEach(function(ev){addEventListener(ev,arm,{once:true,passive:true,capture:true})});
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.chatopen');if(!b)return;if(window.gtag)gtag('event','click_chat',{page:location.pathname});var f=find(document);if(f){f.click();hide();return}window.pbLoadRetell(true)});
+})();
 
 /* Retell widget add-on: dark panel + refocus input (inspects widget's shadow DOM; safe no-op if Retell changes markup) */
 (function(){
@@ -71,6 +83,7 @@ function scan(){roots(document).forEach(setup)}
 var tries=0,iv=setInterval(function(){scan();if(++tries>40)clearInterval(iv)},500);
 new MutationObserver(scan).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 document.addEventListener('click',function(){setTimeout(scan,300)},true);
+new MutationObserver(function(){if(document.getElementById('retell-widget-root'))scan()}).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 /* ===== Space background, scroll reveal, progress, parallax (Nov 4) ===== */
