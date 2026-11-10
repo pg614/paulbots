@@ -95,9 +95,10 @@ var bar=d.createElement('div');bar.id='scrollbar';b.appendChild(bar);
 var sel='main>section,body>section:not(.hero),.ctaband .ctain';
 var items=[].slice.call(d.querySelectorAll(sel)).filter(function(e){return !e.classList.contains('reveal')});
 items.forEach(function(e){e.classList.add('sr')});
-['.grid','.proofgrid','.capgrid','.checks','.faq','.prices','ol','.tgrid'].forEach(function(s){d.querySelectorAll(s).forEach(function(g){[].forEach.call(g.children,function(c,i){if(c.closest('.ftd'))return;c.classList.add('sr');c.style.setProperty('--d',Math.min(i,8)*0.08+'s')})})});
-var counters=[].slice.call(d.querySelectorAll('.amt'));
-function count(el){var m=el.textContent.match(/^(\D*)(\d+)(.*)$/);if(!m||RM)return;var to=+m[2],t0=null;function f(t){t0=t0||t;var p=Math.min(1,(t-t0)/1100),e=1-Math.pow(1-p,3);el.textContent=m[1]+Math.round(to*e)+m[3];if(p<1)requestAnimationFrame(f);else el.textContent=m[1]+to+m[3]}requestAnimationFrame(f)}
+['.grid','.proofgrid','.capgrid','.checks','.faq','.prices','ol','.tgrid'].forEach(function(s){d.querySelectorAll(s).forEach(function(g){if(g.closest('.trainpkgs'))return;[].forEach.call(g.children,function(c,i){if(c.closest('.ftd')||c.closest('.trainpkgs'))return;c.classList.add('sr');c.style.setProperty('--d',Math.min(i,8)*0.08+'s')})})});
+function skipCount(el){return !el||el.closest('.trainpkgs')||el.hasAttribute('data-static')||/,/.test(el.textContent)}
+var counters=[].slice.call(d.querySelectorAll('.amt')).filter(function(e){return !skipCount(e)});
+function count(el){if(skipCount(el))return;var m=el.textContent.match(/^(\D*)(\d+)(.*)$/);if(!m||RM)return;var to=+m[2],t0=null;function f(t){t0=t0||t;var p=Math.min(1,(t-t0)/1100),e=1-Math.pow(1-p,3);el.textContent=m[1]+Math.round(to*e)+m[3];if(p<1)requestAnimationFrame(f);else el.textContent=m[1]+to+m[3]}requestAnimationFrame(f)}
 if('IntersectionObserver' in window&&!RM){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');if(e.target.classList.contains('amt'))count(e.target);io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});d.querySelectorAll('.sr').forEach(function(e){io.observe(e)});counters.forEach(function(e){io.observe(e)})}else d.querySelectorAll('.sr').forEach(function(e){e.classList.add('in')});
 // space canvas
 var c=d.createElement('canvas');c.id='spacebg';c.setAttribute('aria-hidden','true');b.insertBefore(c,b.firstChild);

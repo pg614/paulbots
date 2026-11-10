@@ -456,8 +456,14 @@ html[data-theme=light] .navgroupbtn:hover{color:#2563eb}
   html[data-theme=light] .navdrop{background:#fff;border-color:#e2e8f0;box-shadow:0 16px 40px rgba(15,23,42,.12)}
 }
 @media (min-width:861px) and (max-width:1240px){.navin .navgroupbtn{font-size:.84rem}}
-.trainpkgs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0}
+.trainpkgs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0;align-items:stretch}
+.trainpkgs .price{height:auto}
 .trainpkgs .price h3{min-height:0}
+.trainprice{font-size:1.9rem;font-weight:700;color:var(--head);letter-spacing:-.03em;margin:.15em 0 .7em}
+html:not([data-theme=light]) .trainprice{color:#f8fafc}
+.trainpkgs .checks{margin:0 0 18px}
+.trainpkgs .price .btn{margin-top:8px}
+.js .trainpkgs .sr,.js .trainpkgs .checks li{opacity:1!important;transform:none!important}
 @media (max-width:860px){.trainpkgs{grid-template-columns:1fr}}
 .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:.88rem;margin:0 0 14px;line-height:1.4}
 .crumbs a{font-weight:600;text-decoration:none}
