@@ -39,7 +39,7 @@ html[data-theme=light] .launch-stage{background:radial-gradient(ellipse 80% 70% 
 .launch-shop .shop-body{fill:#e8eef9}
 .launch-shop .shop-awning{fill:#f97316}
 .launch-shop .shop-door,.launch-shop .shop-win{fill:#0b1630}
-.launch-rig{position:absolute;left:50%;bottom:24px;width:64px;margin-left:-32px;animation:cbus-lift 4.8s cubic-bezier(.22,.72,.2,1) forwards,cbus-float 5.2s ease-in-out 4.8s infinite}
+.launch-rig{position:absolute;left:50%;bottom:16px;width:64px;margin-left:-32px;transform-origin:50% 54px;animation:cbus-lift 2.4s cubic-bezier(.16,.84,.22,1) forwards,cbus-float 3.6s ease-in-out 2.4s infinite}
 .launch-rocket{display:block;width:64px;height:108px}
 .launch-rocket .hull{fill:#e8eef9}
 .launch-rocket .fin{fill:#94a3b8}
@@ -48,13 +48,14 @@ html[data-theme=light] .launch-stage{background:radial-gradient(ellipse 80% 70% 
 .launch-rocket .ring{fill:#f97316}
 html[data-theme=light] .launch-rocket .hull,html[data-theme=light] .launch-shop .shop-body{fill:#f8fafc}
 html[data-theme=light] .launch-rocket .fin{fill:#cbd5e1}
-.launch-flame{display:block;width:22px;height:34px;margin:-6px auto 0;background:linear-gradient(180deg,#fff 0%,#f97316 34%,#ea580c 68%,transparent 100%);clip-path:polygon(36% 0,64% 0,86% 42%,50% 100%,14% 42%);transform-origin:50% 0;opacity:0;animation:cbus-flame 4.8s ease forwards,cbus-flicker .16s linear 1s infinite}
-.launch-rig:before{content:"";position:absolute;left:50%;top:92%;width:14px;height:78px;margin-left:-7px;background:linear-gradient(180deg,rgba(249,115,22,.8),rgba(234,88,12,0));filter:blur(1px);opacity:0;animation:cbus-flame 4.8s ease forwards;pointer-events:none}
-@keyframes cbus-lift{0%{transform:translate3d(0,12px,0);opacity:0}12%{opacity:1;transform:translate3d(0,4px,0)}100%{transform:translate3d(0,-148px,0)}}
-@keyframes cbus-float{0%,100%{transform:translate3d(0,-148px,0)}50%{transform:translate3d(0,-160px,0)}}
+.launch-flame{display:block;width:20px;height:32px;margin:-4px auto 0;background:linear-gradient(180deg,#fff 0%,#f97316 28%,#ea580c 62%,rgba(234,88,12,0) 100%);clip-path:polygon(34% 0,66% 0,88% 40%,50% 100%,12% 40%);transform-origin:50% 0;opacity:.15;animation:cbus-flame 2.4s cubic-bezier(.16,.84,.22,1) forwards,cbus-flicker .16s linear .4s infinite}
+.launch-rig:before{content:"";position:absolute;left:50%;bottom:0;width:14px;height:30px;margin-left:-7px;background:linear-gradient(180deg,rgba(249,115,22,.85),rgba(234,88,12,0));filter:blur(.6px);opacity:.1;transform-origin:50% 0;animation:cbus-trail 2.4s cubic-bezier(.16,.84,.22,1) forwards;pointer-events:none}
+@keyframes cbus-lift{0%{transform:translate3d(0,0,0) scale(1);opacity:1}100%{transform:translate3d(0,-90px,0) scale(1.07);opacity:1}}
+@keyframes cbus-float{0%,100%{transform:translate3d(0,-90px,0) scale(1.07)}50%{transform:translate3d(0,-84px,0) scale(1.07)}}
 @keyframes cbus-shop{0%,28%{opacity:1;transform:translate3d(0,0,0) scale(1)}58%{opacity:.75;transform:translate3d(0,-8px,0) scale(.92)}100%{opacity:0;transform:translate3d(0,-14px,0) scale(.5)}}
-@keyframes cbus-flame{0%,14%{opacity:0}26%,100%{opacity:.95}}
-@keyframes cbus-flicker{0%,100%{transform:scaleY(1) scaleX(1)}50%{transform:scaleY(.78) scaleX(.88)}}
+@keyframes cbus-flame{0%{opacity:.35}22%{opacity:1}100%{opacity:.72}}
+@keyframes cbus-trail{0%{opacity:.2}22%{opacity:.88}100%{opacity:.32}}
+@keyframes cbus-flicker{0%,100%{transform:scaleY(1) scaleX(1)}50%{transform:scaleY(.82) scaleX(.9)}}
 @media(max-width:860px){
 .cbus-hero{padding-top:12px;padding-bottom:12px}
 .cbus-copy h1{font-size:2rem}
@@ -62,15 +63,15 @@ html[data-theme=light] .launch-rocket .fin{fill:#cbd5e1}
 .cbus-hero-grid{display:block}
 .launch{min-height:0;margin-top:6px}
 .launch-stage{height:148px}
-.launch-rig{width:48px;margin-left:-24px;bottom:12px;animation-name:cbus-lift-sm,cbus-float-sm}
-.launch-rocket{width:48px;height:82px}
+.launch-rig{width:38px;margin-left:-19px;bottom:10px;transform-origin:50% 31px;animation-name:cbus-lift-sm,cbus-float-sm}
+.launch-rocket{width:38px;height:62px}
 .launch-shop{width:52px;margin-left:-26px;bottom:14px;animation-name:cbus-shop-sm}
-.launch-flame{width:16px;height:22px}
-.launch-rig:before{height:40px}
+.launch-flame{width:14px;height:18px;margin-top:-3px}
+.launch-rig:before{width:10px;height:16px;margin-left:-5px}
 body.pg-lp{padding-bottom:84px}
 }
-@keyframes cbus-lift-sm{0%{transform:translate3d(0,6px,0);opacity:0}16%{opacity:1}100%{transform:translate3d(0,-62px,0)}}
-@keyframes cbus-float-sm{0%,100%{transform:translate3d(0,-62px,0)}50%{transform:translate3d(0,-70px,0)}}
+@keyframes cbus-lift-sm{0%{transform:translate3d(0,0,0) scale(1);opacity:1}100%{transform:translate3d(0,-44px,0) scale(1.07);opacity:1}}
+@keyframes cbus-float-sm{0%,100%{transform:translate3d(0,-44px,0) scale(1.07)}50%{transform:translate3d(0,-40px,0) scale(1.07)}}
 @keyframes cbus-shop-sm{0%,30%{opacity:1;transform:translate3d(0,0,0) scale(1)}62%{opacity:.7;transform:translate3d(0,-4px,0) scale(.9)}100%{opacity:0;transform:translate3d(0,-8px,0) scale(.5)}}
 @media(max-width:700px){
 .founder-local .fcard{flex-direction:column;text-align:center;padding:24px;gap:22px}
@@ -78,15 +79,15 @@ body.pg-lp{padding-bottom:84px}
 }
 @media(prefers-reduced-motion:reduce){
 .launch-rig,.launch-shop,.launch-flame,.launch-rig:before{animation:none}
-.launch-rig{transform:translate3d(0,-148px,0);opacity:1}
+.launch-rig{transform:translate3d(0,-90px,0) scale(1.07);opacity:1}
 .launch-shop{opacity:.95;transform:none}
-.launch-flame{opacity:.9;transform:none}
-.launch-rig:before{opacity:.7}
+.launch-flame{opacity:.72;transform:none}
+.launch-rig:before{opacity:.32}
 }
 @media(prefers-reduced-motion:reduce) and (max-width:860px){
-.launch-rig{transform:translate3d(0,-62px,0)}
+.launch-rig{transform:translate3d(0,-44px,0) scale(1.07)}
 }
-.launch.is-paused .launch-rig,.launch.is-paused .launch-shop,.launch.is-paused .launch-flame{animation-play-state:paused}
+.launch.is-paused .launch-rig,.launch.is-paused .launch-rig:before,.launch.is-paused .launch-shop,.launch.is-paused .launch-flame{animation-play-state:paused}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "PaulBots", "url": "https://paulbots.com", "telephone": "+1-888-772-2820", "parentOrganization": {"@type": "Organization", "name": "Graves AI Solutions (Paul Graves LLC)"}, "logo": "https://paulbots.com/assets/logo-512.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Lead follow-up and reactivation for Columbus-area businesses", "serviceType": "Lead capture, lead follow-up, and lead reactivation", "provider": {"@type": "Organization", "name": "PaulBots", "url": "https://paulbots.com", "telephone": "+1-888-772-2820", "logo": "https://paulbots.com/assets/logo-512.png"}, "areaServed": [{"@type": "City", "name": "Columbus, OH"}, {"@type": "City", "name": "Dublin, OH"}, {"@type": "City", "name": "Westerville, OH"}, {"@type": "City", "name": "Hilliard, OH"}, {"@type": "City", "name": "Worthington, OH"}, {"@type": "City", "name": "Upper Arlington, OH"}, {"@type": "City", "name": "Gahanna, OH"}, {"@type": "City", "name": "Grove City, OH"}, {"@type": "City", "name": "Powell, OH"}, {"@type": "City", "name": "New Albany, OH"}, {"@type": "City", "name": "Delaware, OH"}], "url": "https://paulbots.com/columbus/", "description": "PaulBots helps Columbus-area businesses follow up on new inquiries and reconnect with past prospects, where permission already exists. Free AI Business Assessment for a limited time. Plans starting at only $299/month.", "offers": {"@type": "Offer", "name": "Plans starting at only $299/month", "description": "Plans starting at only $299/month. Final pricing depends on usage, integrations, and how custom the work is.", "priceCurrency": "USD", "price": "299", "url": "https://paulbots.com/columbus/"}}</script><script>window.PAULBOTS_CONFIG={"formEndpoint": "https://formsubmit.co/ajax/paulgravesjr@gmail.com", "schedulingUrl": null, "features": {"accounts": false, "billing": false, "dashboard": false}};window.PB_ORB="https://agent.retellai.com/orb/agent_e261af3419c4533b2605e5d3a2?token=f6298c97d544d174bf38155de68118db"</script></head><body class="pg-lp">
 
