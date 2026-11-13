@@ -27,7 +27,9 @@ if(f)f.addEventListener('submit',async ev=>{ev.preventDefault();const m=f.queryS
   await wait(260);caret(3);for(let i=1;i<=PRE.length;i++){set(PRE.slice(0,i),'','');await wait(52)}
   caret(2);for(let i=1;i<=W[0].length;i++){set(PRE,W[0].slice(0,i),'');await wait(52)}
   caret(3);for(let i=1;i<=POST.length;i++){set(PRE,W[0],POST.slice(0,i));await wait(52)}
-  h.dataset.phase='word';caret(2);h.dataset.done='1';if(W.length<2)return;let k=0;
+  h.dataset.phase='word';caret(2);h.dataset.done='1';
+  (async()=>{let showB=false,first=true;for(;;){await wait(first?2500:4000);first=false;showB=!showB;h.classList.toggle('is-b',showB)}})();
+  if(W.length<2)return;let k=0;
   for(;;){await wait(1800);const x=W[k];for(let i=x.length;i>=0;i--){set(PRE,x.slice(0,i),POST);await wait(35)}
    k=(k+1)%W.length;const n=W[k];await wait(200);for(let i=1;i<=n.length;i++){set(PRE,n.slice(0,i),POST);await wait(55)}}})();})();
 document.querySelectorAll('.themetog').forEach(function(b){b.addEventListener('click',function(){var r=document.documentElement,n=r.getAttribute('data-theme')==='light'?'dark':'light';r.setAttribute('data-theme',n);try{localStorage.setItem('pb-theme',n)}catch(e){}})});
