@@ -380,6 +380,8 @@ html:not([data-theme=light]) p,html:not([data-theme=light]) .lead,html:not([data
 html:not([data-theme=light]) strong,html:not([data-theme=light]) b,html:not([data-theme=light]) .lead strong,html:not([data-theme=light]) p strong{color:#f8fafc}
 html:not([data-theme=light]) .more{color:#93c5fd}
 html:not([data-theme=light]) .ftd-win strong,html:not([data-theme=light]) .ftd-win b,html:not([data-theme=light]) .ftd-win p{color:#0f172a}
+/* Phone-mock notes are white cards. Dark theme sets b to #f8fafc, which hid the titles. */
+.pmwrap .note b{color:#0f172a}
 /* ===== Light-mode sky theme (draft) ===== */
 #skybg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:none}
 html[data-theme=light] #skybg{display:block}
