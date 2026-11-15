@@ -20,7 +20,7 @@ if(f)f.addEventListener('submit',async ev=>{ev.preventDefault();const m=f.queryS
  const phrases=[{l1:'Turn more leads',word:'customers'},{l1:'Turn more visitors',word:'leads'}];
  const PRE='into ',POST='.',TYPE=48,DEL=28,PAUSE=2000;
  const t1=q('.t1'),pre=q('.l2 .pre'),w=q('.l2 .w'),post=q('.l2 .post'),hw=q('.l2 .hw');
- const caret=n=>h.querySelectorAll('.caret').forEach(c=>c.style.visibility=c.classList.contains('c'+n)?'visible':'hidden');
+ const caret=n=>h.querySelectorAll('.caret').forEach(c=>{c.style.display=c.classList.contains('c'+n)?'inline-block':'none'});
  const set=(a,b,c)=>{pre.textContent=a;w.textContent=b;post.textContent=c;hw.style.display=b?'':'none'};
  if(matchMedia('(prefers-reduced-motion: reduce)').matches){t1.textContent=phrases[0].l1;h.dataset.phase='word';set(PRE,phrases[0].word,POST);caret(0);h.dataset.done='1';return}
  const wait=ms=>new Promise(r=>setTimeout(r,ms));
@@ -109,7 +109,8 @@ function down(input, from, to){if(!from||from===to)return input;var ratio=from/t
 
 var WORKER='https://paulbots-xai.paulbots.workers.dev';
 var chat, voice, log, input, sendBtn, talkBtn, hangBtn, statusEl, capEl;
-var voiceSocket, history=[], assistantEl=null, toolLeft=0, greeting='', greeted=false;
+var CHAT_GREETING="Hi! Thanks for visiting PaulBots. I'm your AI assistant. I can help you find the right bot for your business, show you an AI receptionist, or give you a quick sales bot demo. What are you looking for?";
+var voiceSocket, history=[], assistantEl=null, toolLeft=0, greeting='', greeted=false, chatGreeted=false;
 var audioCtx, micStream, processor, playTime=0, sources=[], voiceState='ready', voiceGen=0;
 
 function pill(){return document.getElementById('pb-aria')}
@@ -157,7 +158,13 @@ function setVoice(state, message){
 }
 
 function addMsg(role, text){var n=el('div','pb-msg '+(role==='user'?'user':'bot'),text);log.appendChild(n);log.scrollTop=log.scrollHeight;return n}
-function openChat(){chat.hidden=false;setPill(false);showGreeting();input.focus()}
+function showChatGreeting(){
+  if(chatGreeted) return;
+  chatGreeted=true;
+  if(!log.querySelector('.pb-greet')){var n=addMsg('bot',CHAT_GREETING);n.classList.add('pb-greet')}
+  if(!history.some(function(m){return m.role==='assistant'&&m.content===CHAT_GREETING})) history.unshift({role:'assistant',content:CHAT_GREETING});
+}
+function openChat(){chat.hidden=false;setPill(false);showChatGreeting();input.focus()}
 function closeChat(){chat.hidden=true;setPill(true)}
 function openVoice(){voice.hidden=false;document.body.style.overflow='hidden';if(voiceState==='ready'||voiceState==='ended'||voiceState==='error')setVoice('ready','Ready')}
 function closeVoice(){voice.hidden=true;document.body.style.overflow='';setPill(chat.hidden)}
