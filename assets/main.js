@@ -323,6 +323,7 @@ async function startVoice(){
     if(gen!==voiceGen){micP.then(function(s){s.getTracks().forEach(function(t){t.stop()})}).catch(function(){});return}
     var cfg=await cfgP;
     voiceSocket=await connect(cfg, handleEvent);
+    if(voiceSocket.readyState===1) voiceSocket.send(JSON.stringify({type:'response.create'}));
     showGreeting();
     if(greeting&&capEl&&!capEl.textContent) capEl.textContent=greeting;
     voiceSocket.onclose=function(){if(voiceState==='live'||voiceState==='connecting')setVoice('ended','Call ended');stopMic()};
