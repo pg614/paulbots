@@ -54,15 +54,14 @@ if(h.indexOf('tel:')===0)gtag('event','click_call',{link_text:t,page:location.pa
 else if(/orb|talk in browser|try our ai/i.test(t+' '+(a.className||'')))gtag('event','click_talk_ai',{link_text:t,page:location.pathname});
 else if(/build|contact/i.test(t)||/contact\.html|#build/.test(h))gtag('event','click_contact',{link_text:t,page:location.pathname});},true);
 /* PaulBots assistant: text chat and in-browser voice.
-   The browser asks /api/xai-session for a short-lived token, then opens the
-   realtime WebSocket itself. The API key never comes to the page. */
+   The browser talks to the Cloudflare Worker. Instructions stay on the server. */
 (function(){
 var STYLE=''
 +'.pb-aria{position:fixed;right:16px;bottom:16px;z-index:35;display:inline-flex;align-items:center;gap:8px;max-width:calc(100% - 32px);background:#2563eb;color:#fff;font:600 15px/1 Inter,system-ui,sans-serif;padding:14px 18px;border:0;border-radius:999px;box-shadow:0 10px 24px rgba(37,99,235,.35);cursor:pointer}'
 +'.pb-aria svg{display:block;flex:none}.pb-aria[hidden]{display:none!important}'
 +'@media(max-width:640px){.pb-aria{transition:opacity .25s}body.pb-heroin .pb-aria{opacity:0;visibility:hidden;pointer-events:none}}'
 +'@media(prefers-reduced-motion:reduce){.pb-aria{transition:none}}'
-+'.pb-panel,.pb-voicebox{position:fixed;z-index:80;display:flex;flex-direction:column;background:#0f172a;color:#e2e8f0;border:1px solid #1e293b;border-radius:18px;box-shadow:0 24px 60px rgba(2,6,23,.45);overflow:hidden}'
++'.pb-panel,.pb-voicebox{position:fixed;z-index:80;display:flex;flex-direction:column;background:#0f172a!important;color:#e2e8f0;border:1px solid #1e293b;border-radius:18px;box-shadow:0 24px 60px rgba(2,6,23,.45);overflow:hidden}'
 +'.pb-panel{right:16px;bottom:84px;width:min(380px,calc(100% - 32px));height:min(560px,calc(100dvh - 120px))}'
 +'.pb-panel[hidden],.pb-voice[hidden]{display:none!important}'
 +'.pb-voice{position:fixed;inset:0;z-index:90;background:rgba(2,6,23,.72);display:flex;align-items:flex-end;justify-content:center;padding:12px}'
@@ -88,7 +87,11 @@ var STYLE=''
 +'.pb-cap{margin:0;min-height:1.4em;color:#cbd5e1;font-size:14px;overflow-wrap:anywhere}'
 +'.pb-note{margin:0;color:#94a3b8;font-size:13px}'
 +'.pb-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.2);vertical-align:-1px}'
-+'html[data-theme=light] .pb-panel,html[data-theme=light] .pb-voicebox{background:#fff;color:#0f172a;border-color:#e2e8f0}'
++'.pb-typing{display:inline-flex;gap:5px;align-items:center;min-height:1em}'
++'.pb-typing i{width:7px;height:7px;border-radius:50%;background:#94a3b8;display:block;animation:pbdot 1s infinite}'
++'.pb-typing i:nth-child(2){animation-delay:.15s}.pb-typing i:nth-child(3){animation-delay:.3s}'
++'@keyframes pbdot{0%,80%,100%{opacity:.25}40%{opacity:1}}'
++'html[data-theme=light] .pb-panel,html[data-theme=light] .pb-voicebox{background:#fff!important;color:#0f172a;border-color:#e2e8f0}'
 +'html[data-theme=light] .pb-hd{background:#f8fafc;border-color:#e2e8f0}'
 +'html[data-theme=light] .pb-x{color:#0f172a}'
 +'html[data-theme=light] .pb-msg.bot{background:#f1f5f9;color:#0f172a}'
@@ -104,9 +107,10 @@ function unb64(data){var bin=atob(data),out=new Uint8Array(bin.length),i;for(i=0
 function pcm16(f32){var out=new Int16Array(f32.length),i,s;for(i=0;i<f32.length;i++){s=Math.max(-1,Math.min(1,f32[i]));out[i]=s<0?s*0x8000:s*0x7fff}return out}
 function down(input, from, to){if(!from||from===to)return input;var ratio=from/to,len=Math.floor(input.length/ratio),out=new Float32Array(len),i,idx,a,b,f;for(i=0;i<len;i++){idx=i*ratio;a=Math.floor(idx);b=Math.min(a+1,input.length-1);f=idx-a;out[i]=input[a]*(1-f)+input[b]*f}return out}
 
+var WORKER='https://paulbots-xai.paulbots.workers.dev';
 var chat, voice, log, input, sendBtn, talkBtn, hangBtn, statusEl, capEl;
-var chatSocket, voiceSocket, history=[], textFallback=false, assistantEl=null, toolLeft=0, textWait=null, doneTimer=null;
-var audioCtx, micStream, processor, playTime=0, sources=[], voiceState='ready', conversationId='', voiceGen=0;
+var voiceSocket, history=[], assistantEl=null, toolLeft=0, greeting='', greeted=false;
+var audioCtx, micStream, processor, playTime=0, sources=[], voiceState='ready', voiceGen=0;
 
 function pill(){return document.getElementById('pb-aria')}
 function setPill(show){var b=pill();if(b)b.hidden=!show}
@@ -153,163 +157,145 @@ function setVoice(state, message){
 }
 
 function addMsg(role, text){var n=el('div','pb-msg '+(role==='user'?'user':'bot'),text);log.appendChild(n);log.scrollTop=log.scrollHeight;return n}
-function openChat(){chat.hidden=false;setPill(false);input.focus()}
+function openChat(){chat.hidden=false;setPill(false);showGreeting();input.focus()}
 function closeChat(){chat.hidden=true;setPill(true)}
 function openVoice(){voice.hidden=false;document.body.style.overflow='hidden';if(voiceState==='ready'||voiceState==='ended'||voiceState==='error')setVoice('ready','Ready')}
 function closeVoice(){voice.hidden=true;document.body.style.overflow='';setPill(chat.hidden)}
 
+function busyMessage(status){
+  if(status===429) return 'We are getting a lot of messages right now. Please call 888-618-9599, or try again in a moment.';
+  if(status===503) return 'The assistant is not available yet. Please call 888-618-9599.';
+  return 'The assistant is unavailable. Please call 888-618-9599.';
+}
+function withPhone(msg){
+  msg=msg||busyMessage(0);
+  if(String(msg).indexOf('888-618-9599')===-1) msg+=' Please call 888-618-9599.';
+  return msg;
+}
+async function readJson(r){return r.json().catch(function(){return {}})}
 async function session(){
-  var r=await fetch('/api/xai-session',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
-  var j=await r.json().catch(function(){return {}});
-  if(!r.ok||!j.token)throw new Error(j.error||'Could not start the assistant.');
+  var r=await fetch(WORKER+'/session',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+  var j=await readJson(r);
+  if(r.status===429||r.status===503||!r.ok||!j.token) throw new Error((r.status===429||r.status===503)?busyMessage(r.status):withPhone(j.error));
+  if(j.greeting) greeting=j.greeting;
   return j;
 }
-function socketUrl(cfg){var u=cfg.ws_url;if(conversationId)u+=(u.indexOf('?')>=0?'&':'?')+'conversation_id='+encodeURIComponent(conversationId);return u}
 function connect(cfg, onEvent){
   return new Promise(function(resolve,reject){
     var ws,sent=false,settled=false;
-    try{ws=new WebSocket(socketUrl(cfg),['xai-client-secret.'+cfg.token])}catch(e){reject(e);return}
-    var timer=setTimeout(function(){if(!settled){settled=true;try{ws.close()}catch(err){}reject(new Error('The assistant took too long to connect.'))}},8000);
-    ws.onopen=function(){sent=true;ws.send(JSON.stringify({type:'session.update',session:sessionBody(cfg,cfg.__mode)}))};
+    try{ws=new WebSocket(cfg.ws_url,['xai-client-secret.'+cfg.token])}catch(e){reject(e);return}
+    var timer=setTimeout(function(){if(!settled){settled=true;try{ws.close()}catch(err){}reject(new Error(withPhone('The assistant took too long to connect.')))}},8000);
+    ws.onopen=function(){sent=true;ws.send(JSON.stringify({type:'session.update',session:audioSession()}))};
     ws.onmessage=function(ev){
       if(typeof ev.data!=='string')return;
       var e;try{e=JSON.parse(ev.data)}catch(err){return}
-      if(e.type==='conversation.created'&&e.conversation&&e.conversation.id)conversationId=e.conversation.id;
       if(!settled&&sent&&e.type==='session.updated'){clearTimeout(timer);settled=true;resolve(ws)}
-      if(!settled&&e.type==='error'){clearTimeout(timer);settled=true;reject(new Error((e.error&&(e.error.message||e.error.type))||'The assistant rejected the session.'));return}
+      if(!settled&&e.type==='error'){clearTimeout(timer);settled=true;reject(new Error(withPhone((e.error&&(e.error.message||e.error.type))||'The assistant rejected the session.')));return}
       if(settled&&onEvent)onEvent(e);
     };
-    ws.onerror=function(){if(!settled){clearTimeout(timer);settled=true;reject(new Error('Could not connect.'))}};
+    ws.onerror=function(){if(!settled){clearTimeout(timer);settled=true;reject(new Error(withPhone('Could not connect.')))}};
   });
 }
-function sessionBody(cfg, mode){
-  var body={
-    voice:cfg.voice||'ara',
-    instructions:cfg.instructions,
-    tools:cfg.tools||[],
-    turn_detection:mode==='voice'?{type:'server_vad'}:null,
+function audioSession(){
+  return {
+    turn_detection:{type:'server_vad'},
     audio:{
-      input:{format:{type:'audio/pcm',rate:24000}},
+      input:{format:{type:'audio/pcm',rate:24000},transcription:{model:'grok-transcribe',keyterms:['PaulBots','Paul-BAWTs']}},
       output:{format:{type:'audio/pcm',rate:24000}}
     }
   };
-  if(mode==='voice')body.audio.input.transcription={model:'grok-transcribe',keyterms:['PaulBots','Paul-BAWTs']};
-  return body;
+}
+function showGreeting(){
+  if(!greeting||greeted||!log||log.children.length) return;
+  greeted=true;
+  addMsg('bot',greeting);
+}
+function showTyping(){
+  var n=el('div','pb-msg bot');n.classList.add('pb-wait');n.setAttribute('aria-label','Assistant is typing');
+  var dots=el('span','pb-typing');dots.appendChild(el('i'));dots.appendChild(el('i'));dots.appendChild(el('i'));
+  n.appendChild(dots);log.appendChild(n);log.scrollTop=log.scrollHeight;return n;
 }
 
 function ensureAssistant(){if(!assistantEl)assistantEl=addMsg('bot','');return assistantEl}
 function appendText(delta){if(!delta)return;var n=ensureAssistant();n.textContent+=delta;log.scrollTop=log.scrollHeight}
-function handleEvent(e, mode){
+function handleEvent(e){
   if(!e||!e.type)return;
-  if(e.type==='conversation.created'&&e.conversation&&e.conversation.id)conversationId=e.conversation.id;
-  if(e.type==='response.created'){if(mode==='text')assistantEl=addMsg('bot','')}
-  if(e.type==='response.text.delta'||e.type==='response.output_text.delta')appendText(e.delta||e.text||'');
   if(e.type==='response.output_audio_transcript.delta'||e.type==='response.audio_transcript.delta'){
-    if(mode==='text')appendText(e.delta||'');
-    else if(capEl)capEl.textContent=(capEl.textContent+' '+(e.delta||'')).trim().slice(-280);
+    if(capEl)capEl.textContent=(capEl.textContent+' '+(e.delta||'')).trim().slice(-280);
   }
-  if(e.type==='response.output_audio.delta'||e.type==='response.audio.delta'){if(mode==='voice')playPcm(e.delta||e.audio)}
-  if(e.type==='input_audio_buffer.speech_started'&&mode==='voice')stopPlayback();
-  if(e.type==='conversation.item.input_audio_transcription.completed'&&mode==='voice'&&e.transcript&&capEl)capEl.textContent=e.transcript;
-  if(e.type==='response.function_call_arguments.done'){clearTimeout(doneTimer);onTool(e, mode)}
-  if(e.type==='response.done'&&mode==='text'){
-    clearTimeout(doneTimer);
-    doneTimer=setTimeout(function(){
-      if(toolLeft>0)return;
-      if(assistantEl&&!assistantEl.textContent)assistantEl.textContent='I could not get a text reply. Please try again, or call 888-618-9599.';
-      if(textWait){var done=textWait;textWait=null;done()}
-    },450);
-  }
-  if(e.type==='error'){
-    var msg=(e.error&&(e.error.message||e.error.type))||'Something went wrong.';
-    if(mode==='text'){textFallback=true;if(textWait){var finish=textWait;textWait=null;finish()}}
-    if(mode==='voice'&&(voiceState==='connecting'||voiceState==='live'))setVoice('error',String(msg));
-  }
+  if(e.type==='response.output_audio.delta'||e.type==='response.audio.delta')playPcm(e.delta||e.audio);
+  if(e.type==='input_audio_buffer.speech_started')stopPlayback();
+  if(e.type==='conversation.item.input_audio_transcription.completed'&&e.transcript&&capEl)capEl.textContent=e.transcript;
+  if(e.type==='response.function_call_arguments.done')onTool(e);
+  if(e.type==='error'&&(voiceState==='connecting'||voiceState==='live'))setVoice('error',withPhone((e.error&&(e.error.message||e.error.type))||'Something went wrong.'));
 }
-async function onTool(e, mode){
+async function onTool(e){
   toolLeft++;
   var args=e.arguments;
   if(typeof args==='string'){try{args=JSON.parse(args||'{}')}catch(err){args={}}}
   var result;
   try{
     if(e.name==='submit_lead'){
-      var r=await fetch('/api/xai-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(args||{})});
-      result=await r.json().catch(function(){return {ok:false}});
-      if(result&&result.clientFallback){
-        var ep=(window.PAULBOTS_CONFIG||{}).formEndpoint;
-        if(!ep)result={ok:false,error:'The lead form is not connected. Ask them to call 888-618-9599.'};
-        else{
-          var fr=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({name:args.name,business:args.business||'',email:args.email,phone:args.phone||'',business_type:args.business_type||'',task:args.task,consent:'yes',bot:'PaulBots website assistant',_subject:'New PaulBots lead',_template:'table'})});
-          var fj=await fr.json().catch(function(){return {}});
-          result=fr.ok&&String(fj.success)==='true'?{ok:true}:{ok:false,error:'The lead form did not accept the request.'};
-        }
-      }
+      var r=await fetch(WORKER+'/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(args||{})});
+      if(r.status===429||r.status===503) result={ok:false,error:busyMessage(r.status)};
+      else result=await readJson(r);
     }else result={ok:false,error:'That action is not available.'};
-  }catch(err){result={ok:false,error:'Could not save the request.'}}
-  var ws=mode==='voice'?voiceSocket:chatSocket;
-  if(ws&&ws.readyState===1){
-    ws.send(JSON.stringify({type:'conversation.item.create',item:{type:'function_call_output',call_id:e.call_id||e.item_id,output:JSON.stringify(result)}}));
+  }catch(err){result={ok:false,error:'Could not save the request. Please call 888-618-9599.'}}
+  if(voiceSocket&&voiceSocket.readyState===1){
+    voiceSocket.send(JSON.stringify({type:'conversation.item.create',item:{type:'function_call_output',call_id:e.call_id||e.item_id,output:JSON.stringify(result)}}));
     toolLeft--;
-    if(toolLeft<=0){
-      toolLeft=0;
-      var again={type:'response.create'};
-      if(mode==='text'&&!textFallback)again.response={modalities:['text']};
-      ws.send(JSON.stringify(again));
-    }
+    if(toolLeft<=0){toolLeft=0;voiceSocket.send(JSON.stringify({type:'response.create'}))}
   }else toolLeft=Math.max(0,toolLeft-1);
 }
-
+async function readChatStream(r, typing){
+  var reader=r.body&&r.body.getReader?r.body.getReader():null;
+  var decoder=new TextDecoder(),buf='',started=false;
+  function take(line){
+    var t=line.trim();if(t.indexOf('data:')!==0)return;
+    var raw=t.slice(5).trim();if(!raw)return;
+    var e;try{e=JSON.parse(raw)}catch(err){return}
+    if(e.delta){
+      if(!started){started=true;if(typing&&typing.parentNode)typing.remove();assistantEl=addMsg('bot','')}
+      appendText(e.delta);
+    }
+    if(e.error) throw new Error(withPhone(e.error));
+  }
+  if(!reader){
+    (await r.text()).split('\n').forEach(take);
+  }else{
+    while(true){
+      var step=await reader.read();
+      if(step.done)break;
+      buf+=decoder.decode(step.value,{stream:true});
+      var lines=buf.split('\n');buf=lines.pop()||'';
+      for(var i=0;i<lines.length;i++)take(lines[i]);
+    }
+    if(buf)take(buf);
+  }
+  if(typing&&typing.parentNode)typing.remove();
+  if(!started) assistantEl=addMsg('bot',busyMessage(0));
+}
 async function chatReply(text){
   history.push({role:'user',content:text});
+  if(history.length>20) history=history.slice(-20);
   addMsg('user',text);
   sendBtn.disabled=true;
+  var typing=showTyping();
+  assistantEl=null;
   try{
-    if(!textFallback){
-      if(!chatSocket||chatSocket.readyState!==1){
-        var cfg=await session();
-        chatSocket=await connect(Object.assign({__mode:'text'},cfg), function(e){handleEvent(e,'text')});
-      }
-      assistantEl=null;
-      var wait=new Promise(function(resolve){textWait=resolve});
-      chatSocket.send(JSON.stringify({type:'conversation.item.create',item:{type:'message',role:'user',content:[{type:'input_text',text:text}]}}));
-      chatSocket.send(JSON.stringify({type:'response.create',response:{modalities:['text']}}));
-      var timed=new Promise(function(resolve){setTimeout(function(){textFallback=true;resolve()},20000)});
-      await Promise.race([wait,timed]);
-      if(textFallback)await fallbackReply();
-      else history.push({role:'assistant',content:assistantEl?assistantEl.textContent:''});
-    }else await fallbackReply();
+    var r=await fetch(WORKER+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history.slice(-20)})});
+    if(r.status===429||r.status===503||!r.ok){
+      if(typing.parentNode)typing.remove();
+      addMsg('bot',(r.status===429||r.status===503)?busyMessage(r.status):withPhone((await readJson(r)).error));
+      return;
+    }
+    await readChatStream(r, typing);
+    if(assistantEl&&assistantEl.textContent) history.push({role:'assistant',content:assistantEl.textContent});
   }catch(err){
-    if(!textFallback){
-      textFallback=true;
-      try{await fallbackReply()}catch(e2){addMsg('bot',(e2&&e2.message)||(err&&err.message)||'The assistant is unavailable. Please call 888-618-9599.')}
-    }else addMsg('bot',(err&&err.message)||'The assistant is unavailable. Please call 888-618-9599.');
+    if(typing&&typing.parentNode)typing.remove();
+    addMsg('bot',withPhone(err&&err.message));
   }finally{sendBtn.disabled=false}
 }
-async function fallbackReply(){
-  if(assistantEl&&!assistantEl.textContent)assistantEl.remove();
-  assistantEl=addMsg('bot','');
-  var r=await fetch('/api/xai-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history})});
-  if(!r.ok){var j=await r.json().catch(function(){return {}});throw new Error(j.error||'The assistant could not reply.')}
-  var reader=r.body&&r.body.getReader?r.body.getReader():null;
-  if(!reader){var all=await r.text();applySse(all);return}
-  var decoder=new TextDecoder(),buf='';
-  while(true){
-    var step=await reader.read();
-    if(step.done)break;
-    buf+=decoder.decode(step.value,{stream:true});
-    var lines=buf.split('\n');buf=lines.pop()||'';
-    for(var i=0;i<lines.length;i++)consumeSse(lines[i]);
-  }
-  if(buf)consumeSse(buf);
-  history.push({role:'assistant',content:assistantEl.textContent});
-}
-function consumeSse(line){
-  var t=line.trim();if(t.indexOf('data:')!==0)return;var raw=t.slice(5).trim();if(!raw)return;
-  var e;try{e=JSON.parse(raw)}catch(err){return}
-  if(e.delta)appendText(e.delta);
-  if(e.error)throw new Error(e.error);
-}
-function applySse(text){text.split('\n').forEach(consumeSse);history.push({role:'assistant',content:assistantEl.textContent})}
 function submitChat(){var text=(input.value||'').trim();if(!text||sendBtn.disabled)return;input.value='';chatReply(text)}
 
 function playPcm(data){
@@ -336,7 +322,9 @@ async function startVoice(){
     await Promise.race([resumeP, new Promise(function(r){setTimeout(r,800)})]);
     if(gen!==voiceGen){micP.then(function(s){s.getTracks().forEach(function(t){t.stop()})}).catch(function(){});return}
     var cfg=await cfgP;
-    voiceSocket=await connect(Object.assign({__mode:'voice'},cfg), function(e){handleEvent(e,'voice')});
+    voiceSocket=await connect(cfg, handleEvent);
+    showGreeting();
+    if(greeting&&capEl&&!capEl.textContent) capEl.textContent=greeting;
     voiceSocket.onclose=function(){if(voiceState==='live'||voiceState==='connecting')setVoice('ended','Call ended');stopMic()};
     micStream=await micP;
     var source=audioCtx.createMediaStreamSource(micStream);
@@ -354,7 +342,7 @@ async function startVoice(){
   }catch(err){
     if(gen!==voiceGen)return;
     stopMic();if(voiceSocket){try{voiceSocket.close()}catch(e){}}
-    setVoice('error',(err&&err.message)||'The microphone or the assistant is unavailable.');
+    setVoice('error',withPhone(err&&err.message));
   }
 }
 function stopMic(){if(processor){try{processor.disconnect()}catch(e){}}processor=null;if(micStream){micStream.getTracks().forEach(function(t){t.stop()});micStream=null}stopPlayback()}
