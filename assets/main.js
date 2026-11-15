@@ -14,24 +14,40 @@ if(f)f.addEventListener('submit',async ev=>{ev.preventDefault();const m=f.queryS
   const j=await r.json().catch(()=>({}));if(!r.ok||String(j.success)!=='true')throw 0; // FormSubmit returns "false" as a string on errors
   if(window.gtag)gtag('event','generate_lead',{form:'contact'});
   f.reset();m.className='formmsg ok';m.textContent="Thanks! We got your request and Paul will be in touch soon."}catch{m.className='formmsg err';m.textContent="Sorry, that didn't go through. Please try again, or call 888-618-9599."}});
-// Hero typewriter. Only textContent of persistent spans changes; the .hw highlight span is static HTML.
+// Hero typewriter. Types one full headline, pauses, deletes it, then the other, and loops.
+// Ghost text reserves the wider line so the layout does not jump. The highlight stays on the key word.
 (()=>{const h=document.querySelector('.typer');if(!h)return;const q=s=>h.querySelector(s);
- const W=['customers'],PRE='into ',POST='.';
- const l1=q('.tl .ghost').textContent,t1=q('.t1'),pre=q('.l2 .pre'),w=q('.l2 .w'),post=q('.l2 .post'),hw=q('.l2 .hw');
- const longest=W.reduce((a,b)=>b.length>a.length?b:a);q('.ghost .hw').textContent=longest; // reserve widest variant
+ const phrases=[{l1:'Turn more leads',word:'customers'},{l1:'Turn more visitors',word:'leads'}];
+ const PRE='into ',POST='.',TYPE=48,DEL=28,PAUSE=2000;
+ const t1=q('.t1'),pre=q('.l2 .pre'),w=q('.l2 .w'),post=q('.l2 .post'),hw=q('.l2 .hw');
  const caret=n=>h.querySelectorAll('.caret').forEach(c=>c.style.visibility=c.classList.contains('c'+n)?'visible':'hidden');
- const set=(a,b,c)=>{pre.textContent=a;w.textContent=b;post.textContent=c;hw.style.display=(b||h.dataset.phase==='word')?'':'none'};
- if(matchMedia('(prefers-reduced-motion: reduce)').matches){t1.textContent=l1;h.dataset.phase='word';set(PRE,W[0],POST);caret(0);h.dataset.done='1';return}
- const wait=ms=>new Promise(r=>setTimeout(r,ms));caret(1);set('','','');
- (async()=>{await wait(300);for(let i=1;i<=l1.length;i++){t1.textContent=l1.slice(0,i);await wait(52)}
-  await wait(260);caret(3);for(let i=1;i<=PRE.length;i++){set(PRE.slice(0,i),'','');await wait(52)}
-  caret(2);for(let i=1;i<=W[0].length;i++){set(PRE,W[0].slice(0,i),'');await wait(52)}
-  caret(3);for(let i=1;i<=POST.length;i++){set(PRE,W[0],POST.slice(0,i));await wait(52)}
-  h.dataset.phase='word';caret(2);h.dataset.done='1';
-  (async()=>{let showB=false,first=true;for(;;){await wait(first?2500:4000);first=false;showB=!showB;h.classList.toggle('is-b',showB)}})();
-  if(W.length<2)return;let k=0;
-  for(;;){await wait(1800);const x=W[k];for(let i=x.length;i>=0;i--){set(PRE,x.slice(0,i),POST);await wait(35)}
-   k=(k+1)%W.length;const n=W[k];await wait(200);for(let i=1;i<=n.length;i++){set(PRE,n.slice(0,i),POST);await wait(55)}}})();})();
+ const set=(a,b,c)=>{pre.textContent=a;w.textContent=b;post.textContent=c;hw.style.display=b?'':'none'};
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){t1.textContent=phrases[0].l1;h.dataset.phase='word';set(PRE,phrases[0].word,POST);caret(0);h.dataset.done='1';return}
+ const wait=ms=>new Promise(r=>setTimeout(r,ms));
+ async function typePhrase(p){
+  caret(1);set('','','');t1.textContent='';
+  for(let i=1;i<=p.l1.length;i++){t1.textContent=p.l1.slice(0,i);await wait(TYPE)}
+  await wait(160);caret(3);
+  for(let i=1;i<=PRE.length;i++){set(PRE.slice(0,i),'','');await wait(TYPE)}
+  caret(2);
+  for(let i=1;i<=p.word.length;i++){set(PRE,p.word.slice(0,i),'');await wait(TYPE)}
+  caret(3);
+  for(let i=1;i<=POST.length;i++){set(PRE,p.word,POST.slice(0,i));await wait(TYPE)}
+  h.dataset.phase='word';caret(3);
+ }
+ async function deletePhrase(p){
+  h.dataset.phase='';caret(3);
+  for(let i=POST.length;i>=0;i--){set(PRE,p.word,POST.slice(0,i));await wait(DEL)}
+  caret(2);
+  for(let i=p.word.length;i>=0;i--){set(PRE,p.word.slice(0,i),'');await wait(DEL)}
+  caret(3);hw.style.display='none';
+  for(let i=PRE.length;i>=0;i--){set(PRE.slice(0,i),'','');await wait(DEL)}
+  caret(1);
+  for(let i=p.l1.length;i>=0;i--){t1.textContent=p.l1.slice(0,i);await wait(DEL)}
+ }
+ caret(1);set('','','');
+ (async()=>{await wait(280);let k=0;for(;;){const p=phrases[k];await typePhrase(p);await wait(PAUSE);await deletePhrase(p);k=(k+1)%phrases.length;await wait(180)}})();
+})();
 document.querySelectorAll('.themetog').forEach(function(b){b.addEventListener('click',function(){var r=document.documentElement,n=r.getAttribute('data-theme')==='light'?'dark':'light';r.setAttribute('data-theme',n);try{localStorage.setItem('pb-theme',n)}catch(e){}})});
 (function(){var m=document.getElementById('orbmodal');if(!m)return;var f=m.querySelector('.orbframe'),last;
 function open(e){last=e&&e.currentTarget;if(!f.firstChild){var i=document.createElement('iframe');i.src=window.PB_ORB;i.title='PaulBots AI voice demo';i.setAttribute('allow','microphone; autoplay');f.appendChild(i)}m.hidden=false;document.body.style.overflow='hidden';m.querySelector('.orbclose').focus()}
