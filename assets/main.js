@@ -9,11 +9,11 @@ if(f)f.addEventListener('submit',async ev=>{ev.preventDefault();const m=f.queryS
  if(!f.checkValidity()){m.textContent='Please fill in your name, business, email, task, and check the consent box.';f.reportValidity();return}
  if(f._honey.value)return; // honeypot (FormSubmit also ignores _honey)
  const ep=(window.PAULBOTS_CONFIG||{}).formEndpoint;const data=Object.fromEntries(new FormData(f));
- if(!ep||ep.startsWith('PLACEHOLDER')){console.warn('Form endpoint not connected yet',data);m.textContent='Thanks! Our online form is being connected. For the fastest reply, please call 888-772-2820.';return}
+ if(!ep||ep.startsWith('PLACEHOLDER')){console.warn('Form endpoint not connected yet',data);m.textContent='Thanks! Our online form is being connected. For the fastest reply, please call 888-618-9599.';return}
  try{const r=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)});
   const j=await r.json().catch(()=>({}));if(!r.ok||String(j.success)!=='true')throw 0; // FormSubmit returns "false" as a string on errors
   if(window.gtag)gtag('event','generate_lead',{form:'contact'});
-  f.reset();m.className='formmsg ok';m.textContent="Thanks! We got your request and Paul will be in touch soon."}catch{m.className='formmsg err';m.textContent="Sorry, that didn't go through. Please try again, or call 888-772-2820."}});
+  f.reset();m.className='formmsg ok';m.textContent="Thanks! We got your request and Paul will be in touch soon."}catch{m.className='formmsg err';m.textContent="Sorry, that didn't go through. Please try again, or call 888-618-9599."}});
 // Hero typewriter. Only textContent of persistent spans changes; the .hw highlight span is static HTML.
 (()=>{const h=document.querySelector('.typer');if(!h)return;const q=s=>h.querySelector(s);
  const W=['customers'],PRE='into ',POST='.';
