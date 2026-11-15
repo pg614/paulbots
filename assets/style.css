@@ -473,3 +473,19 @@ html:not([data-theme=light]) .trainprice{color:#f8fafc}
 .crumbs [aria-current=page]{color:#475569}
 html:not([data-theme=light]) .crumbs .sep{color:#94a3b8}
 html:not([data-theme=light]) .crumbs [aria-current=page]{color:#cbd5e1}
+/* Homepage headline: after the typewriter, slide between two lines. */
+.typer-viewport{display:block;overflow:hidden;width:100%}
+.typer-track{display:flex;width:200%;transition:transform .72s cubic-bezier(.16,.84,.22,1)}
+.typer-slide{flex:0 0 50%;width:50%;min-width:0;transition:opacity .72s linear}
+.typer.is-b .typer-track{transform:translate3d(-50%,0,0)}
+.typer:not(.is-b) .s-b,.typer.is-b .s-a{opacity:.72}
+.typer-slide .tl{white-space:nowrap;max-width:100%}
+@media (prefers-reduced-motion:reduce){
+.typer-track,.typer-slide{transition:none!important}
+.typer.is-b .typer-track{transform:none}
+.typer .s-b{display:none}
+.typer:not(.is-b) .s-b,.typer.is-b .s-a{opacity:1}
+}
+@media (max-width:520px){
+.herotext h1.typer{font-size:clamp(1.55rem,7.4vw,2rem)!important;line-height:1.14!important}
+}
